@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import UserContext from '../UserContext';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 
 export default function Home() {
+    const userData = useContext(UserContext);
+
     return (
         <div>
             <Container className="mt-5">
