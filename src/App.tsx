@@ -1,24 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
+import Jumbotron from 'react-bootstrap/Jumbotron';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+      <Container className="mt-5">
+      <Jumbotron className="text-center">
+        <h1>Localing for Businesses</h1>
         <p>
-          Edit <code>src/App.tsx</code> and save to reload.
+          <Button variant="primary">Log In to Dashboard</Button>
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <p>
+          <Button variant="secondary">Verify an Order</Button>
+        </p>
+      </Jumbotron>
+      </Container>
     </div>
   );
 }
