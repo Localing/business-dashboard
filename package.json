@@ -11,13 +11,18 @@
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "@types/react-router-dom": "^5.1.5",
+<<<<<<< HEAD
+    "@types/styled-components": "^5.1.2",
+=======
     "aws-amplify": "^3.0.22",
+>>>>>>> origin/staging
     "bootstrap": "^4.5.0",
     "react": "^16.13.1",
     "react-bootstrap": "^1.3.0",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
+    "styled-components": "^5.1.1",
     "typescript": "~3.9.7"
   },
   "scripts": {
