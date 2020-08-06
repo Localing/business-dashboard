@@ -23,7 +23,7 @@ const Sidebar = (props: SidebarProps) => {
                   icon={faHome}
                   text={'Home'}
                   to={'/dashboard'}
-                  active={(props.activePage === undefined) ? true : false }
+                  active={(props.activePage === undefined)}
                 />
               </styles.NavigationSection>
               <styles.NavigationSection>
@@ -31,13 +31,13 @@ const Sidebar = (props: SidebarProps) => {
                   icon={faCalculator}
                   text={'Verify Order'}
                   to={'/dashboard/verify'}
-                  active={(props.activePage === 'verify') ? true : false }
+                  active={(props.activePage === 'verify')}
                 />
                 <SidebarLink
                   icon={faTags}
                   text={'Active Orders'}
                   to={'/dashboard/orders'}
-                  active={(props.activePage === 'orders') ? true : false }
+                  active={(props.activePage === 'orders')}
                 />
               </styles.NavigationSection>
             </div>

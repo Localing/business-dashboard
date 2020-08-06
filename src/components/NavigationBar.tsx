@@ -10,7 +10,9 @@ const NavigationBar = () => {
 
     return (
         <styles.StyledNavbar expand="lg">
-            <styles.StyledNavbarBrand href="#">Localing Business Dashboard  </styles.StyledNavbarBrand>
+            <Link to={"/dashboard"}>
+            <styles.StyledNavbarBrand>Localing Business Dashboard</styles.StyledNavbarBrand>
+            </Link>
             <Navbar.Collapse className="justify-content-end">
                 {userData.user ?
                     <Fragment>

@@ -10,12 +10,6 @@ import VerifyOrder from '../components/dashboard/VerifyOrder';
 
 import * as styles from './styles/DashboardStyles';
 
-const testcomp = () => {
-    return (
-        <h1>hello</h1>
-    )
-}
-
 const Dashboard = (props: any) => {
     return (
         <Container fluid>
