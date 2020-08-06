@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Auth, Hub } from 'aws-amplify';
 
 interface UserContext {
@@ -24,6 +24,8 @@ interface User {
 }
 
 const UserContext = React.createContext<UserContext>({} as UserContext);
+
+export const useUserData = () => useContext(UserContext);
 
 export const UserConsumer = UserContext.Consumer;
 

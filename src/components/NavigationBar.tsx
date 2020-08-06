@@ -1,11 +1,11 @@
-import React, { useContext, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
-import UserContext from '../UserContext';
+import { useUserData } from '../UserContext';
 
 const NavigationBar = () => {
-    const userData = useContext(UserContext);
+    const userData = useUserData();
 
     return (
         <Navbar bg="light" expand="lg">

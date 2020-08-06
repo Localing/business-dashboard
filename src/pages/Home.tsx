@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
-import UserContext from '../UserContext';
+import { useUserData } from '../UserContext';
 
 function Home() {
-    const userData = useContext(UserContext);
+    const userData = useUserData();
 
     return (
         userData.authenticated ?
