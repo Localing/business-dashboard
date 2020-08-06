@@ -2,6 +2,8 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useUserData } from '../UserContext';
 import * as styles from './styles/NavigationBarStyles';
 
@@ -20,7 +22,7 @@ const NavigationBar = () => {
                             Logged in as: {userData.user.attributes.email}
                         </Navbar.Text>
                         <styles.LogoutButton variant="outline-secondary" onClick={() => userData.logout()}>
-                            Log Out
+                            <FontAwesomeIcon icon={faSignOutAlt} /> Logout
                         </styles.LogoutButton>
                     </Fragment>
                     :

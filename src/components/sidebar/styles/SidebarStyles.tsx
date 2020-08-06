@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 export const Sidebar = styled(Col)`
   background-color: #f8f9fa;
   height: 100vh;
-  border-right: 2px #bbbbbb solid;
+  border-right: 2px #dddddd solid;
 `;
 
 export const BusinessName = styled.p`

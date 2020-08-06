@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 
 // Component styles
 export const StyledNavbar = styled(Navbar)`
-  border-bottom: 2px #bbbbbb solid;
+  border-bottom: 2px #dddddd solid;
   padding: 10px 50px;
 `;
 
