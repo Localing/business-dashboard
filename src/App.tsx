@@ -22,7 +22,7 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/" component={Home} />
-          <ProtectedRoute exact path="/dashboard" component={Dashboard} />
+          <ProtectedRoute path="/dashboard" component={Dashboard} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/reset-password" component={ResetPassword} />
           <Route path="/otp">

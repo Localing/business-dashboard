@@ -1,0 +1,17 @@
+import styled from 'styled-components';
+import Navbar from 'react-bootstrap/Navbar';
+import Button from 'react-bootstrap/Button';
+
+// Component styles
+export const StyledNavbar = styled(Navbar)`
+  border-bottom: 2px #bbbbbb solid;
+  padding: 10px 50px;
+`;
+
+export const StyledNavbarBrand = styled(Navbar.Brand)`
+  color: #666666 !important;
+`;
+
+export const LogoutButton = styled(Button)`
+  margin-left: 20px;
+`;
