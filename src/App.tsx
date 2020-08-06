@@ -4,10 +4,11 @@ import { UserProvider } from './UserContext';
 import ProtectedRoute from './components/ProtectedRoute';
 
 // Pages
+import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import OTPInput from './components/OTP';
 import Login from './pages/Login';
-import Home from './pages/Home';
+import ResetPassword from './pages/ResetPassword';
 
 // Initialize AWS Amplify
 import Amplify from 'aws-amplify';
@@ -23,6 +24,7 @@ function App() {
           <Route exact path="/" component={Home} />
           <ProtectedRoute exact path="/dashboard" component={Dashboard} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/reset-password" component={ResetPassword} />
           <Route path="/otp">
             <OTPInput numGroups={3} numInGroup={3} onComplete={(val: string) => { console.log(val) }} />
           </Route>

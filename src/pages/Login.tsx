@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Redirect, RouteComponentProps } from 'react-router-dom';
+import { Redirect, RouteComponentProps, Link } from 'react-router-dom';
 import { useUserData } from '../UserContext';
 import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
@@ -45,9 +45,9 @@ const Login = (props: RouteComponentProps) => {
 
     return (
         userData.authenticated ?
-        <Redirect to={from} />
-        :
-        <Container>
+            <Redirect to={from} />
+            :
+            <Container>
                 <Form onSubmit={handleLogin}>
                     <h2 className="text-center">Localing for Business</h2>
                     {(userData.loginError) && <Alert variant="danger" dismissible> {userData.loginError.message} </Alert>}
@@ -67,6 +67,11 @@ const Login = (props: RouteComponentProps) => {
                         onChange={handleChange}
                         required
                     />
+                    <div className="text-right">
+                        <Link to={process.env.PUBLIC_URL + "/reset-password"}>
+                            Forgot your password?
+                        </Link>
+                    </div>
                     <div>
                         <div className="pt-4">
                             {userData.loading ?
