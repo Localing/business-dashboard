@@ -1,16 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { Auth, Hub } from 'aws-amplify';
 
-type UserContextType = {
+interface UserContext {
     loading: boolean,
     authenticated: boolean,
-    user: object | null,
+    user: User | null,
     login: (user: string, password: string) => void,
     logout: () => void,
-    loginError: object | null
+    loginError: CognitoError | null
 }
 
-const UserContext = React.createContext<UserContextType | undefined>(undefined);
+interface CognitoError {
+    code: number,
+    name: string,
+    message: string
+}
+
+interface User {
+    attributes: {
+        email: string,
+        sub: string
+    }
+}
+
+const UserContext = React.createContext<UserContext>({} as UserContext);
 
 export const UserConsumer = UserContext.Consumer;
 
@@ -18,13 +31,14 @@ export const UserProvider: React.FC = ({ children }) => {
 
     const [loading, setLoading] = useState<boolean>(true);
     const [authenticated, setAuthenticated] = useState<boolean>(false);
-    const [user, setUser] = useState<object | null>(null);
-    const [loginError, setLoginError] = useState<object | null>(null);
+    const [user, setUser] = useState<User | null>(null);
+    const [loginError, setLoginError] = useState<CognitoError | null>(null);
 
     const login = async (email: string, password: string) => {
         requestLogin();
         try {
             const user = await Auth.signIn(email, password);
+            console.log(user);
             receiveLogin(user);
         } catch (err) {
             receiveLoginError(err);
@@ -47,14 +61,14 @@ export const UserProvider: React.FC = ({ children }) => {
         setLoginError(null);
     }
 
-    const receiveLogin = (user: object) => {
+    const receiveLogin = (user: User) => {
         setUser(user);
         setAuthenticated(true);
         setLoading(false);
         setLoginError(null);
     }
 
-    const receiveLoginError = (error: object) => {
+    const receiveLoginError = (error: CognitoError) => {
         setLoginError(error);
         setUser(null);
         setAuthenticated(false);

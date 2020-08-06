@@ -5,6 +5,7 @@ import { UserProvider } from './UserContext';
 // Pages
 import Home from './components/Home';
 import OTPInput from './components/OTP';
+import Login from './components/Login';
 
 // Initialize AWS Amplify
 import Amplify from 'aws-amplify';
@@ -16,9 +17,8 @@ function App() {
     <UserProvider>
       <Router>
         <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/login" component={Login} />
           <Route path="/otp">
             <OTPInput numGroups={3} numInGroup={3} onComplete={(val: string) => { console.log(val) }} />
           </Route>

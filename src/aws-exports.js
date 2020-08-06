@@ -1,9 +1,8 @@
 const awsmobile = {
     "aws_project_region": "eu-west-2",
-    "aws_cognito_identity_pool_id": "eu-west-2:74c372e5-24a1-432f-ae0e-30c4a9f15012",
     "aws_cognito_region": "eu-west-2",
-    "aws_user_pools_id": "eu-west-2_8GjbfJ9Ct",
-    "aws_user_pools_web_client_id": "u53qbta3dfjv74kfj9oeakujg",
+    "aws_user_pools_id": "eu-west-2_NzD6u4BOr",
+    "aws_user_pools_web_client_id": "u4gqkt9qlkah8k9bifans9u6k",
     "oauth": {
         "domain": "auth.localing.co.uk",
         "scope": [
