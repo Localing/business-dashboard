@@ -70,3 +70,10 @@ export const LoginButton = styled(Button)`
   font-size: 1rem;
   font-weight: bold;
 `;
+
+export const ReturnLink = styled(Link)`
+  text-align: center;
+  font-size: 0.9rem;
+  display: block;
+  margin: 20px 0 0 0;
+`;
