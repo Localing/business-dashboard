@@ -6,6 +6,8 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { Auth } from "aws-amplify";
 
+import * as styles from './styles/LoginStyles';
+
 const ResetPassword = () => {
 
     const [email, setEmail] = useState("");
@@ -97,25 +99,35 @@ interface GenerateCodeProps {
 
 const GenerateCodeForm = (props: GenerateCodeProps) => {
     return (
-        <div>
-            <h3>Reset your password</h3>
-            {props.message !== "" && <Alert variant="dark">{props.message}</Alert>}
-            <Form onSubmit={props.handleGenerateCode}>
-                <Form.Control
-                    type="email"
-                    name="email"
-                    value={props.email}
-                    onChange={props.handleChange}
-                    placeholder="E-mail Address"
-                    required
-                />
-                <div>
-                    <Button type="submit" variant="dark">
-                        {props.isLoading && <Spinner animation="border" size="sm" as="span" />}Reset Password
-                    </Button>
-                </div>
-            </Form>
-        </div>
+        <>
+            <styles.BackgroundImage></styles.BackgroundImage>
+            <styles.LoginBoxWrapper><styles.LoginBox>
+                <styles.LoginTitle>Reset your password</styles.LoginTitle>
+                {props.message !== "" && <Alert variant="dark">{props.message}</Alert>}
+                <Form onSubmit={props.handleGenerateCode}>
+                    <styles.FormInputBox
+                        type="email"
+                        name="email"
+                        value={props.email}
+                        onChange={props.handleChange}
+                        placeholder="E-mail Address"
+                        required
+                    />
+                    <div>
+                        {props.isLoading ?
+                            <styles.LoginButton variant="primary" size="lg" className="square-corners" type="submit" block disabled>
+                                <Spinner animation="border" size="sm" as="span" />&nbsp;&nbsp;
+                                Reset Password
+                            </styles.LoginButton>
+                            :
+                            <styles.LoginButton variant="primary" size="lg" className="square-corners" block type="submit">
+                                Reset Password
+                            </styles.LoginButton>
+                        }
+                    </div>
+                </Form>
+            </styles.LoginBox></styles.LoginBoxWrapper>
+        </>
     )
 }
 
@@ -130,34 +142,44 @@ interface ResetPasswordFormProps {
 
 const ResetPasswordForm = (props: ResetPasswordFormProps) => {
     return (
-        <div>
-            <h3>Enter verification code</h3>
-            {props.message !== "" && <Alert variant="dark">{props.message}</Alert>}
-            <p>Check your email for a code and enter it below.</p>
-            <Form onSubmit={props.handleSavePassword}>
-                <Form.Control
-                    type="text"
-                    name="code"
-                    value={props.code}
-                    onChange={props.handleChange}
-                    placeholder="Code"
-                    required
-                />
-                <Form.Control
-                    type="password"
-                    name="newPassword"
-                    value={props.newPassword}
-                    onChange={props.handleChange}
-                    placeholder="New Password"
-                    required
-                />
-                <div>
-                    <Button type="submit" variant="dark">
-                        {props.isLoading && <Spinner animation="border" size="sm" as="span" />}&nbsp;&nbsp;Reset Password
-                    </Button>
-                </div>
-            </Form>
-        </div>
+        <>
+            <styles.BackgroundImage></styles.BackgroundImage>
+            <styles.LoginBoxWrapper><styles.LoginBox>
+                <styles.LoginTitle>Enter verification code</styles.LoginTitle>
+                {props.message !== "" && <Alert variant="dark">{props.message}</Alert>}
+                <styles.LoginSubtitle>Check your email for a code and enter it below.</styles.LoginSubtitle>
+                <Form onSubmit={props.handleSavePassword}>
+                    <styles.FormInputBox
+                        type="text"
+                        name="code"
+                        value={props.code}
+                        onChange={props.handleChange}
+                        placeholder="Code"
+                        required
+                    />
+                    <styles.FormInputBox
+                        type="password"
+                        name="newPassword"
+                        value={props.newPassword}
+                        onChange={props.handleChange}
+                        placeholder="New Password"
+                        required
+                    />
+                    <div>
+                        {props.isLoading ?
+                            <styles.LoginButton variant="primary" size="lg" className="square-corners" type="submit" block disabled>
+                                <Spinner animation="border" size="sm" as="span" />&nbsp;&nbsp;
+                                Reset Password
+                            </styles.LoginButton>
+                            :
+                            <styles.LoginButton variant="primary" size="lg" className="square-corners" block type="submit">
+                                Reset Password
+                            </styles.LoginButton>
+                        }
+                    </div>
+                </Form>
+            </styles.LoginBox></styles.LoginBoxWrapper>
+        </>
     )
 }
 

@@ -1,5 +1,6 @@
 import React, { FunctionComponent, useState, useEffect, useRef } from 'react';
-import styled from 'styled-components';
+
+import * as styles from './styles/OTPStyles';
 
 type OnChangeEvent = React.ChangeEvent<HTMLInputElement>;
 type OnFocusEvent = React.FocusEvent<HTMLInputElement>;
@@ -7,12 +8,13 @@ type OnFocusEvent = React.FocusEvent<HTMLInputElement>;
 // Prop type declarations
 type SingleOTPProps = {
   initial: number,
-  shouldAutoFocus: Boolean,
-  shouldFocus: Boolean,
+  shouldAutoFocus: boolean,
+  shouldFocus: boolean,
   value: number | string,
   onKeyDown: Function,
   onChange: Function,
-  onFocus: Function
+  onFocus: Function,
+  lastElement: boolean
 }
 
 type OTPProps = {
@@ -20,13 +22,6 @@ type OTPProps = {
   numInGroup: number,
   onComplete: Function
 }
-
-// Component styles
-const SingleOTPInputBox = styled.input`
-  margin: 10px;
-  padding: 20px;
-  width: 60px;
-`;
 
 const SingleOTPInput:FunctionComponent<SingleOTPProps> = props => {
   const singleOTPInputEl = useRef<HTMLInputElement>(null);
@@ -51,7 +46,7 @@ const SingleOTPInput:FunctionComponent<SingleOTPProps> = props => {
   }, [props.value]);
 
   return <>
-      <SingleOTPInputBox
+      <styles.SingleOTPInputBox
         autoComplete="off"
         type={'tel'}
         value={value}
@@ -60,6 +55,7 @@ const SingleOTPInput:FunctionComponent<SingleOTPProps> = props => {
         onFocus={(e) => props.onFocus(e)}
         ref={singleOTPInputEl}
       />
+      {(!props.lastElement) ? <styles.Separator>&#9675;</styles.Separator> : null}
   </>
 }
 
@@ -158,7 +154,7 @@ const OTPInput:FunctionComponent<OTPProps> = (props) => {
 
       for (let j = 0; j < props.numInGroup; j++) {
         subInputGroup.push(
-            <SingleOTPInput
+          <SingleOTPInput
             key={j}
             initial={0}
             shouldFocus={numFocus === (i*props.numInGroup + j)}
@@ -170,20 +166,21 @@ const OTPInput:FunctionComponent<OTPProps> = (props) => {
               setNumFocus(i*props.numInGroup + j);
               e.target.select();
             }}
+            lastElement={(j + 1) === props.numInGroup}
           />
         )
       }
 
-      inputs.push(<div key={i}>{subInputGroup}</div>);
+      inputs.push(<styles.GroupWrapper key={i}>{subInputGroup}</styles.GroupWrapper>);
       
     }
     return inputs;
   }
 
   return <>
-    <div>
+    <styles.OTPWrapper>
       {renderInputs()}
-    </div>
+    </styles.OTPWrapper>
   </>
 }
 

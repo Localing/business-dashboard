@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { Redirect, RouteComponentProps, Link } from 'react-router-dom';
 import { useUserData } from '../UserContext';
 import Alert from 'react-bootstrap/Alert';
-import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
+import LocalingLogo from './../assets/localingLogo.png';
+
+import * as styles from './styles/LoginStyles';
 
 const Login = (props: RouteComponentProps) => {
 
@@ -47,47 +49,54 @@ const Login = (props: RouteComponentProps) => {
         userData.authenticated ?
             <Redirect to={from} />
             :
-            <Container>
-                <Form onSubmit={handleLogin}>
-                    <h2 className="text-center">Localing for Business</h2>
-                    {(userData.loginError) && <Alert variant="danger" dismissible> {userData.loginError.message} </Alert>}
-                    <Form.Control
-                        type="text"
-                        name="username"
-                        placeholder="Username"
-                        value={username}
-                        onChange={handleChange}
-                        required
-                    />
-                    <Form.Control
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={handleChange}
-                        required
-                    />
-                    <div className="text-right">
-                        <Link to={process.env.PUBLIC_URL + "/reset-password"}>
-                            Forgot your password?
-                        </Link>
-                    </div>
-                    <div>
-                        <div className="pt-4">
-                            {userData.loading ?
-                                <Button variant="outline-dark" size="lg" className="square-corners" type="submit" block disabled>
-                                    <Spinner animation="border" size="sm" as="span" />&nbsp;&nbsp;
-                                      Login
-                                    </Button>
-                                :
-                                <Button variant="outline-dark" size="lg" className="square-corners" block type="submit">
-                                    Login
-                            </Button>
-                            }
-                        </div>
-                    </div>
-                </Form>
-            </Container>
+            <>
+                <styles.BackgroundImage></styles.BackgroundImage>
+                <styles.LoginBoxWrapper>
+                    <styles.LoginBox>
+                        <styles.Logo src={LocalingLogo} />
+                        <Form onSubmit={handleLogin}>
+                            <styles.LoginTextWrapper>
+                                <styles.LoginTitle>Localing for Business</styles.LoginTitle>
+                                <styles.LoginSubtitle>Not a business? <styles.SubtitleLink href="https://localing.co.uk">Localing for customers</styles.SubtitleLink></styles.LoginSubtitle>
+                            </styles.LoginTextWrapper>
+                            {(userData.loginError) && <Alert variant="danger"> {userData.loginError.message} </Alert>}
+                            <styles.FormInputBox
+                                type="text"
+                                name="username"
+                                placeholder="Username"
+                                value={username}
+                                onChange={handleChange}
+                                required
+                            />
+                            <styles.FormInputBox
+                                type="password"
+                                name="password"
+                                placeholder="Password"
+                                value={password}
+                                onChange={handleChange}
+                                required
+                            />
+                            <styles.ForgotPasswordText to={process.env.PUBLIC_URL + "/reset-password"}>
+                                Forgot your password?
+                            </styles.ForgotPasswordText>
+                            <div>
+                                <div className="pt-4">
+                                    {userData.loading ?
+                                        <styles.LoginButton variant="primary" size="lg" className="square-corners" type="submit" block disabled>
+                                            <Spinner animation="border" size="sm" as="span" />&nbsp;&nbsp;
+                                            Continue
+                                        </styles.LoginButton>
+                                        :
+                                        <styles.LoginButton variant="primary" size="lg" className="square-corners" block type="submit">
+                                            Continue
+                                        </styles.LoginButton>
+                                    }
+                                </div>
+                            </div>
+                        </Form>
+                    </styles.LoginBox>
+                </styles.LoginBoxWrapper>
+            </>
     )
 }
 
