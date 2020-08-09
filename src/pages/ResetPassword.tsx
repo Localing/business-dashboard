@@ -1,9 +1,9 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Alert from "react-bootstrap/Alert";
 import Spinner from "react-bootstrap/Spinner";
-import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { Auth } from "aws-amplify";
 
 import * as styles from './styles/LoginStyles';
@@ -67,25 +67,28 @@ const ResetPassword = () => {
         }
     }
     return (
-        <Container>
-            {codeSent ?
-                <ResetPasswordForm
-                    code={code}
-                    message={message}
-                    newPassword={newPassword}
-                    handleChange={handleChange}
-                    handleSavePassword={handleSavePassword}
-                    isLoading={isLoading}
-                />
-                :
-                <GenerateCodeForm
-                    email={email}
-                    message={message}
-                    handleChange={handleChange}
-                    handleGenerateCode={handleGenerateCode}
-                    isLoading={isLoading}
-                />}
-        </Container>
+            <>
+            <styles.BackgroundImage></styles.BackgroundImage>
+            <styles.LoginBoxWrapper><styles.LoginBox>
+                {codeSent ?
+                    <ResetPasswordForm
+                        code={code}
+                        message={message}
+                        newPassword={newPassword}
+                        handleChange={handleChange}
+                        handleSavePassword={handleSavePassword}
+                        isLoading={isLoading}
+                    />
+                    :
+                    <GenerateCodeForm
+                        email={email}
+                        message={message}
+                        handleChange={handleChange}
+                        handleGenerateCode={handleGenerateCode}
+                        isLoading={isLoading}
+                    />}
+                </styles.LoginBox></styles.LoginBoxWrapper>
+            </>
     );
 };
 
@@ -99,34 +102,32 @@ interface GenerateCodeProps {
 
 const GenerateCodeForm = (props: GenerateCodeProps) => {
     return (
-        <>
-            <styles.BackgroundImage></styles.BackgroundImage>
-            <styles.LoginBoxWrapper><styles.LoginBox>
-                <styles.LoginTitle>Reset your password</styles.LoginTitle>
-                {props.message !== "" && <Alert variant="dark">{props.message}</Alert>}
-                <Form onSubmit={props.handleGenerateCode}>
-                    <styles.FormInputBox
-                        type="email"
-                        name="email"
-                        value={props.email}
-                        onChange={props.handleChange}
-                        placeholder="E-mail Address"
-                        required
-                    />
-                    <div>
-                        {props.isLoading ?
-                            <styles.LoginButton variant="primary" size="lg" className="square-corners" type="submit" block disabled>
-                                <Spinner animation="border" size="sm" as="span" />&nbsp;&nbsp;
-                                Reset Password
-                            </styles.LoginButton>
-                            :
-                            <styles.LoginButton variant="primary" size="lg" className="square-corners" block type="submit">
-                                Reset Password
-                            </styles.LoginButton>
-                        }
-                    </div>
-                </Form>
-            </styles.LoginBox></styles.LoginBoxWrapper>
+        <>  
+            <styles.LoginTitle>Reset your password</styles.LoginTitle>
+            {props.message !== "" && <Alert variant="dark">{props.message}</Alert>}
+            <Form onSubmit={props.handleGenerateCode}>
+                <styles.FormInputBox
+                    type="email"
+                    name="email"
+                    value={props.email}
+                    onChange={props.handleChange}
+                    placeholder="E-mail Address"
+                    required
+                />
+                <div>
+                    {props.isLoading ?
+                        <styles.LoginButton variant="primary" size="lg" className="square-corners" type="submit" block disabled>
+                            <Spinner animation="border" size="sm" as="span" />&nbsp;&nbsp;
+                            Reset Password
+                        </styles.LoginButton>
+                        :
+                        <styles.LoginButton variant="primary" size="lg" className="square-corners" block type="submit">
+                            Reset Password
+                        </styles.LoginButton>
+                    }
+                </div>
+                <styles.ReturnLink to={"/login"}>Return to sign in</styles.ReturnLink>
+            </Form>
         </>
     )
 }
@@ -142,43 +143,41 @@ interface ResetPasswordFormProps {
 
 const ResetPasswordForm = (props: ResetPasswordFormProps) => {
     return (
-        <>
-            <styles.BackgroundImage></styles.BackgroundImage>
-            <styles.LoginBoxWrapper><styles.LoginBox>
-                <styles.LoginTitle>Enter verification code</styles.LoginTitle>
-                {props.message !== "" && <Alert variant="dark">{props.message}</Alert>}
-                <styles.LoginSubtitle>Check your email for a code and enter it below.</styles.LoginSubtitle>
-                <Form onSubmit={props.handleSavePassword}>
-                    <styles.FormInputBox
-                        type="text"
-                        name="code"
-                        value={props.code}
-                        onChange={props.handleChange}
-                        placeholder="Code"
-                        required
-                    />
-                    <styles.FormInputBox
-                        type="password"
-                        name="newPassword"
-                        value={props.newPassword}
-                        onChange={props.handleChange}
-                        placeholder="New Password"
-                        required
-                    />
-                    <div>
-                        {props.isLoading ?
-                            <styles.LoginButton variant="primary" size="lg" className="square-corners" type="submit" block disabled>
-                                <Spinner animation="border" size="sm" as="span" />&nbsp;&nbsp;
-                                Reset Password
-                            </styles.LoginButton>
-                            :
-                            <styles.LoginButton variant="primary" size="lg" className="square-corners" block type="submit">
-                                Reset Password
-                            </styles.LoginButton>
-                        }
-                    </div>
-                </Form>
-            </styles.LoginBox></styles.LoginBoxWrapper>
+        <>  
+            <styles.LoginTitle>Enter verification code</styles.LoginTitle>
+            {props.message !== "" && <Alert variant="dark">{props.message}</Alert>}
+            <styles.LoginSubtitle>Check your email for a code and enter it below.</styles.LoginSubtitle>
+            <Form onSubmit={props.handleSavePassword}>
+                <styles.FormInputBox
+                    type="text"
+                    name="code"
+                    value={props.code}
+                    onChange={props.handleChange}
+                    placeholder="Code"
+                    required
+                />
+                <styles.FormInputBox
+                    type="password"
+                    name="newPassword"
+                    value={props.newPassword}
+                    onChange={props.handleChange}
+                    placeholder="New Password"
+                    required
+                />
+                <div>
+                    {props.isLoading ?
+                        <styles.LoginButton variant="primary" size="lg" className="square-corners" type="submit" block disabled>
+                            <Spinner animation="border" size="sm" as="span" />&nbsp;&nbsp;
+                            Reset Password
+                        </styles.LoginButton>
+                        :
+                        <styles.LoginButton variant="primary" size="lg" className="square-corners" block type="submit">
+                            Reset Password
+                        </styles.LoginButton>
+                    }
+                </div>
+                <styles.ReturnLink to={"/login"}>Return to sign in</styles.ReturnLink>
+            </Form>
         </>
     )
 }

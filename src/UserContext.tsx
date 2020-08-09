@@ -40,7 +40,6 @@ export const UserProvider: React.FC = ({ children }) => {
         requestLogin();
         try {
             const user = await Auth.signIn(email, password);
-            console.log(user);
             receiveLogin(user);
         } catch (err) {
             receiveLoginError(err);
