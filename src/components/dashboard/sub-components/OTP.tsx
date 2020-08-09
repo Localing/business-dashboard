@@ -1,4 +1,6 @@
 import React, { FunctionComponent, useState, useEffect, useRef } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircle as farCircle } from '@fortawesome/free-regular-svg-icons';
 
 import * as styles from './styles/OTPStyles';
 
@@ -6,7 +8,7 @@ type OnChangeEvent = React.ChangeEvent<HTMLInputElement>;
 type OnFocusEvent = React.FocusEvent<HTMLInputElement>;
 
 // Prop type declarations
-type SingleOTPProps = {
+interface SingleOTPProps {
   initial: number,
   shouldAutoFocus: boolean,
   shouldFocus: boolean,
@@ -17,13 +19,13 @@ type SingleOTPProps = {
   lastElement: boolean
 }
 
-type OTPProps = {
+interface OTPProps {
   numGroups: number,
   numInGroup: number,
   onComplete: Function
 }
 
-const SingleOTPInput:FunctionComponent<SingleOTPProps> = props => {
+const SingleOTPInput:FunctionComponent<SingleOTPProps> = (props) => {
   const singleOTPInputEl = useRef<HTMLInputElement>(null);
   const [value, setValue] = useState<number|string>('');
 
@@ -55,7 +57,7 @@ const SingleOTPInput:FunctionComponent<SingleOTPProps> = props => {
         onFocus={(e) => props.onFocus(e)}
         ref={singleOTPInputEl}
       />
-      {(!props.lastElement) ? <styles.Separator>&#9675;</styles.Separator> : null}
+      {(!props.lastElement) ? <styles.Separator><FontAwesomeIcon icon={farCircle} /></styles.Separator> : null}
   </>
 }
 
