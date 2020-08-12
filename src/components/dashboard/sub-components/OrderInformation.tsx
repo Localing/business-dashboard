@@ -35,9 +35,9 @@ const OrderInformation:FunctionComponent<OrderInformationProps> = ({ data, ...re
 
   const totalPrice = (data: { name: string, quantity: number, price: number, imgUrl: string }[]):number => {
     let total: number = 0;
-    data.map( (item: { name: string, quantity: number, price: number, imgUrl: string }) => {
-      total += (item.price*item.quantity);
-    });
+    data.map( (item: { name: string, quantity: number, price: number, imgUrl: string }) => 
+      total += (item.price*item.quantity)
+    );
     return total;
   }
   
@@ -74,7 +74,7 @@ const OrderInformation:FunctionComponent<OrderInformationProps> = ({ data, ...re
             <tbody>
               {data.items.map( ( item: { name: string, quantity: number, price: number, imgUrl: string } ) => {
                 return <tr>
-                  <td><img src={item.imgUrl}/></td>
+                  <td><img alt={item.name} src={item.imgUrl}/></td>
                   <td className="text-left align-middle">{item.name}</td>
                   <td className="align-middle">{formatPrice(item.price)}</td>
                   <td className="align-middle">{item.quantity}</td>

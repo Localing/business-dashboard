@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { Redirect, RouteComponentProps, Link } from 'react-router-dom';
+import { Redirect, RouteComponentProps } from 'react-router-dom';
 import { useUserData } from '../UserContext';
 import Alert from 'react-bootstrap/Alert';
 import Spinner from 'react-bootstrap/Spinner';
-import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import LocalingLogo from './../assets/localingLogo.png';
 
@@ -53,7 +52,7 @@ const Login = (props: RouteComponentProps) => {
                 <styles.BackgroundImage></styles.BackgroundImage>
                 <styles.LoginBoxWrapper>
                     <styles.LoginBox>
-                        <styles.Logo src={LocalingLogo} />
+                        <styles.Logo alt={"Localing logo"} src={LocalingLogo} />
                         <Form onSubmit={handleLogin}>
                             <styles.LoginTextWrapper>
                                 <styles.LoginTitle>Localing for Business</styles.LoginTitle>

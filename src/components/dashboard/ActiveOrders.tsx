@@ -1,12 +1,13 @@
 import React from 'react';
 import * as styles from './styles/ActiveOrdersStyles';
+import * as dashboardStyles from './styles/DashboardStyles';
 
 const ActiveOrders = () => {
 
     return (
-        <div>
-          <h1>Active Orders</h1>
-        </div>
+      <dashboardStyles.DashboardContainer fluid>
+        <styles.Title>Active Orders</styles.Title>
+      </dashboardStyles.DashboardContainer>
     )
 }
 

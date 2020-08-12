@@ -5,9 +5,9 @@ import * as dashboardStyles from './styles/DashboardStyles';
 const Home = () => {
 
     return (
-        <div>
-          <h1>Home</h1>
-        </div>
+      <dashboardStyles.DashboardContainer fluid>
+        <styles.Title>Home</styles.Title>
+      </dashboardStyles.DashboardContainer>
     )
 }
 

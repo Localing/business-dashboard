@@ -1,6 +1,4 @@
 import React, {FunctionComponent, useState, useEffect} from 'react';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faKeyboard, faCheck } from '@fortawesome/free-solid-svg-icons';
 import OTPInput from './sub-components/OTP';
