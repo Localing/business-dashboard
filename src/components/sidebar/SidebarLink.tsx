@@ -1,5 +1,4 @@
 import React from 'react';
-import { faHome, faCalculator } from '@fortawesome/free-solid-svg-icons';
 import * as styles from './styles/SidebarLinkStyles';
 
 interface SidebarProps {
@@ -11,7 +10,7 @@ interface SidebarProps {
 
 const SidebarLink = ( { active, text, icon, to} : SidebarProps) => {
     return (
-      <styles.NavigationLink to={to} active={active}>
+      <styles.NavigationLink to={to} linkActive={active}>
         <styles.NavigationIcon icon={icon} />
         <styles.NavigationText>{text}</styles.NavigationText>
       </styles.NavigationLink>

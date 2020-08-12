@@ -1,21 +1,36 @@
-import React from 'react';
-import { Switch, Route } from "react-router-dom";
+import React, { useState, useEffect, FunctionComponent } from 'react';
+import { Switch, Route, useLocation } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import NavigationBar from '../components/NavigationBar';
 import Sidebar from '../components/sidebar/Sidebar';
+import MobileTopBar from '../components/MobileTopBar';
 import ActiveOrders from '../components/dashboard/ActiveOrders';
 import Home from '../components/dashboard/Home';
 import VerifyOrder from '../components/dashboard/VerifyOrder';
 
 import * as styles from './styles/DashboardStyles';
 
-const Dashboard = (props: any) => {
+const Dashboard:FunctionComponent<any> = () => {
+    const location = useLocation();
+    
+    const [sidebarDisplay, setSidebarDisplay] = useState<boolean>(false);
+
+    const toggleSidebar = () => {
+        setSidebarDisplay(!sidebarDisplay);
+    }
+
+    useEffect(() => {
+        setSidebarDisplay(false);
+
+    }, [location.pathname]);
+
     return (
         <Container fluid>
             <Row>
-                <Sidebar activePage={props.location.pathname.split('/')[2]}></Sidebar>
-                <styles.Main md={10}>
+                <Sidebar toggleSidebar={toggleSidebar} sidebarShow={sidebarDisplay} activePage={location.pathname.split('/')[2]}></Sidebar>
+                <MobileTopBar toggleSidebar={toggleSidebar} />
+                <styles.Main>
                     <NavigationBar />
                     <styles.ContentContainer>
                         <Switch>
