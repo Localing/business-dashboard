@@ -30,6 +30,10 @@ export const LoginBox = styled.div`
   background-color: #fff;
   border-radius: 5px;
   padding: 50px;
+
+  @media (max-width: 720px) {
+    width: 90vw;
+  }
 `;
 
 export const Logo = styled.img`

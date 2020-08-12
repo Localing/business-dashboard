@@ -42,22 +42,23 @@ const OrderInformation:FunctionComponent<OrderInformationProps> = ({ data, ...re
   }
   
   return (
-      <dashboardStyles.InformationWrapper direction={"row"}>
+    <dashboardStyles.InformationWrapper direction={"row"}>
         
       <dashboardStyles.InformationWrapper direction={"column"}>
-          <dashboardStyles.InformationSubBox>
-            <dashboardStyles.InformationSubHeading><FontAwesomeIcon icon={faUser} />&nbsp;&nbsp;Customer Information</dashboardStyles.InformationSubHeading>
-            <dashboardStyles.Information><strong>Name:</strong> {data.customerName}</dashboardStyles.Information>
-            <dashboardStyles.Information><strong>Contact:</strong> {data.customerContact}</dashboardStyles.Information>
-          </dashboardStyles.InformationSubBox>
-          <dashboardStyles.InformationSubBox>
-            <dashboardStyles.InformationSubHeading><FontAwesomeIcon icon={faTag} />&nbsp;&nbsp;Order Information</dashboardStyles.InformationSubHeading>
-            <dashboardStyles.Information><strong>Order code:</strong> {formatOrderCode(data.orderCode)}</dashboardStyles.Information>
-            <dashboardStyles.Information><strong>Order date:</strong> { formatDate(data.orderDate) }</dashboardStyles.Information>
-            <dashboardStyles.Information><strong>Status:</strong>  {(data.redeemed) ? "Redeemed" : "Not redeemed"}</dashboardStyles.Information>
-          </dashboardStyles.InformationSubBox>
-        </dashboardStyles.InformationWrapper>
+        <dashboardStyles.InformationSubBox>
+          <dashboardStyles.InformationSubHeading><FontAwesomeIcon icon={faUser} />&nbsp;&nbsp;Customer Information</dashboardStyles.InformationSubHeading>
+          <dashboardStyles.Information><strong>Name:</strong> {data.customerName}</dashboardStyles.Information>
+          <dashboardStyles.Information><strong>Contact:</strong> {data.customerContact}</dashboardStyles.Information>
+        </dashboardStyles.InformationSubBox>
+        <dashboardStyles.InformationSubBox>
+          <dashboardStyles.InformationSubHeading><FontAwesomeIcon icon={faTag} />&nbsp;&nbsp;Order Information</dashboardStyles.InformationSubHeading>
+          <dashboardStyles.Information><strong>Order code:</strong> {formatOrderCode(data.orderCode)}</dashboardStyles.Information>
+          <dashboardStyles.Information><strong>Order date:</strong> { formatDate(data.orderDate) }</dashboardStyles.Information>
+          <dashboardStyles.Information><strong>Status:</strong>  {(data.redeemed) ? "Redeemed" : "Not redeemed"}</dashboardStyles.Information>
+        </dashboardStyles.InformationSubBox>
+      </dashboardStyles.InformationWrapper>
 
+      <dashboardStyles.InformationWrapper direction={"column"}>
         <dashboardStyles.InformationSubBox>
           <dashboardStyles.InformationSubHeading><FontAwesomeIcon icon={faShoppingBag} />&nbsp;&nbsp;Order Items</dashboardStyles.InformationSubHeading>
           <styles.ItemsTable hover>
@@ -66,30 +67,32 @@ const OrderInformation:FunctionComponent<OrderInformationProps> = ({ data, ...re
                 <th></th>
                 <th>Product</th>
                 <th>Unit Price</th>
-                <th>Quantity</th>
-                <th>Subtotal</th>
+                <th>QTY</th>
+                <th>Sub-total</th>
               </tr>
             </thead>
             <tbody>
               {data.items.map( ( item: { name: string, quantity: number, price: number, imgUrl: string } ) => {
                 return <tr>
                   <td><img src={item.imgUrl}/></td>
-                  <td className="align-middle">{item.name}</td>
+                  <td className="text-left align-middle">{item.name}</td>
                   <td className="align-middle">{formatPrice(item.price)}</td>
                   <td className="align-middle">{item.quantity}</td>
                   <td className="align-middle">{formatPrice(item.price * item.quantity)}</td>
                 </tr>
               }) }
               <tr>
-                <styles.TotalPriceRow colSpan={5}>
+                <td></td>
+                <styles.TotalPriceRow colSpan={4}>
                   Total Price: {formatPrice(totalPrice(data.items))}
                 </styles.TotalPriceRow>
               </tr>
             </tbody>
           </styles.ItemsTable>
         </dashboardStyles.InformationSubBox>
-
       </dashboardStyles.InformationWrapper>
+      
+    </dashboardStyles.InformationWrapper>
   )
 }
 

@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import Alert from "react-bootstrap/Alert";
 import Spinner from "react-bootstrap/Spinner";
 import Form from "react-bootstrap/Form";
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { Auth } from "aws-amplify";
 
 import * as styles from './styles/LoginStyles';

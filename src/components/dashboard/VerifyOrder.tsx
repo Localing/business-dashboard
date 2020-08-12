@@ -46,8 +46,16 @@ const VerifyOrder:FunctionComponent<VerifyOrderProps> = () => {
       "orderID": "786828b0-d8e0-11ea-87d0-0242ac130003",
       "orderDate": "1596826981",
       "redeemed": false,
-      "items": [{"name": "Pizza", "quantity": 1, price: 2.0, "imgUrl": "https://localingimagefrontenddevtemp.s3.eu-west-2.amazonaws.com/pizza.jpg"}, 
-      {"name": "Coffee and Cake", "quantity": 2, price: 1.0, "imgUrl": "https://localingimagefrontenddevtemp.s3.eu-west-2.amazonaws.com/cake.jpg"}]
+      "items": [{"name": "Pizza; toppings: olives, anchovies, red onions, mozzarella, chives", "quantity": 1, price: 2.0, "imgUrl": "https://localingimagefrontenddevtemp.s3.eu-west-2.amazonaws.com/pizza.jpg"},
+      {"name": "Pizza; toppings: olives, anchovies, red onions, mozzarella, chives", "quantity": 1, price: 2.0, "imgUrl": "https://localingimagefrontenddevtemp.s3.eu-west-2.amazonaws.com/pizza.jpg"},
+      {"name": "Pizza; toppings: olives, anchovies, red onions, mozzarella, chives", "quantity": 1, price: 2.0, "imgUrl": "https://localingimagefrontenddevtemp.s3.eu-west-2.amazonaws.com/pizza.jpg"},
+      {"name": "Pizza; toppings: olives, anchovies, red onions, mozzarella, chives", "quantity": 1, price: 2.0, "imgUrl": "https://localingimagefrontenddevtemp.s3.eu-west-2.amazonaws.com/pizza.jpg"},
+      {"name": "Pizza; toppings: olives, anchovies, red onions, mozzarella, chives", "quantity": 1, price: 2.0, "imgUrl": "https://localingimagefrontenddevtemp.s3.eu-west-2.amazonaws.com/pizza.jpg"},
+      {"name": "Pizza; toppings: olives, anchovies, red onions, mozzarella, chives", "quantity": 1, price: 2.0, "imgUrl": "https://localingimagefrontenddevtemp.s3.eu-west-2.amazonaws.com/pizza.jpg"},
+      {"name": "Pizza; toppings: olives, anchovies, red onions, mozzarella, chives", "quantity": 1, price: 2.0, "imgUrl": "https://localingimagefrontenddevtemp.s3.eu-west-2.amazonaws.com/pizza.jpg"},
+      {"name": "Pizza; toppings: olives, anchovies, red onions, mozzarella, chives", "quantity": 1, price: 2.0, "imgUrl": "https://localingimagefrontenddevtemp.s3.eu-west-2.amazonaws.com/pizza.jpg"},
+      {"name": "Pizza; toppings: olives, anchovies, red onions, mozzarella, chives", "quantity": 1, price: 2.0, "imgUrl": "https://localingimagefrontenddevtemp.s3.eu-west-2.amazonaws.com/pizza.jpg"},
+      {"name": "Caramel vanilla shortcake with pumpkin spiced latte", "quantity": 2, price: 1.0, "imgUrl": "https://localingimagefrontenddevtemp.s3.eu-west-2.amazonaws.com/cake.jpg"}]
     }
   }
 
@@ -68,6 +76,24 @@ const VerifyOrder:FunctionComponent<VerifyOrderProps> = () => {
   useEffect(() => {
     console.log(orderData);
   }, [orderData]);
+
+  useEffect(() => {
+    // Reset component and clear data after two seconds once verified
+
+    let timer: any;
+    if (displayVerfied === true) {
+      timer = setTimeout(() => {
+        setOrderData(undefined);
+        setDisplayOTP(true);
+        setDisplayVerified(false);
+      }, 2000);
+    }
+    return () => {
+      if (timer) {
+        clearTimeout(timer);
+      }
+    };
+  }, [displayVerfied]);
 
   return (
       <dashboardStyles.DashboardContainer fluid>
@@ -90,9 +116,9 @@ const VerifyOrder:FunctionComponent<VerifyOrderProps> = () => {
               
           </dashboardStyles.InformationWrapper>
           {orderData && displayOrderDetails ? <>
-            <dashboardStyles.ContentBlockWrapper>
+            <styles.ButtonBlockWrapper>
               <dashboardStyles.SubmitButton onClick={verifyOrder} ><FontAwesomeIcon icon={ faCheck } />  Verify order redeemed</dashboardStyles.SubmitButton>
-            </dashboardStyles.ContentBlockWrapper>
+            </styles.ButtonBlockWrapper>
           </> : null}
 
           {displayVerfied ? <>

@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useState, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle as farCircle } from '@fortawesome/free-regular-svg-icons';
+import { faMinus } from '@fortawesome/free-solid-svg-icons';
 
 import * as styles from './styles/OTPStyles';
 
@@ -172,8 +173,11 @@ const OTPInput:FunctionComponent<OTPProps> = (props) => {
           />
         )
       }
+      let groupSeparator = (i !== props.numGroups - 1) ? <styles.GroupSeparator>
+        <FontAwesomeIcon icon={faMinus} />
+      </styles.GroupSeparator> : null;
 
-      inputs.push(<styles.GroupWrapper key={i}>{subInputGroup}</styles.GroupWrapper>);
+      inputs.push(<styles.SectionWrapper key={i}><styles.GroupWrapper>{subInputGroup}</styles.GroupWrapper>{groupSeparator}</styles.SectionWrapper>);
       
     }
     return inputs;
