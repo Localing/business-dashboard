@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Alert from "react-bootstrap/Alert";
 import Spinner from "react-bootstrap/Spinner";
-import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import { Auth } from "aws-amplify";
+
+import * as styles from './styles/LoginStyles';
 
 const ResetPassword = () => {
 
@@ -65,25 +65,28 @@ const ResetPassword = () => {
         }
     }
     return (
-        <Container>
-            {codeSent ?
-                <ResetPasswordForm
-                    code={code}
-                    message={message}
-                    newPassword={newPassword}
-                    handleChange={handleChange}
-                    handleSavePassword={handleSavePassword}
-                    isLoading={isLoading}
-                />
-                :
-                <GenerateCodeForm
-                    email={email}
-                    message={message}
-                    handleChange={handleChange}
-                    handleGenerateCode={handleGenerateCode}
-                    isLoading={isLoading}
-                />}
-        </Container>
+            <>
+            <styles.BackgroundImage></styles.BackgroundImage>
+            <styles.LoginBoxWrapper><styles.LoginBox>
+                {codeSent ?
+                    <ResetPasswordForm
+                        code={code}
+                        message={message}
+                        newPassword={newPassword}
+                        handleChange={handleChange}
+                        handleSavePassword={handleSavePassword}
+                        isLoading={isLoading}
+                    />
+                    :
+                    <GenerateCodeForm
+                        email={email}
+                        message={message}
+                        handleChange={handleChange}
+                        handleGenerateCode={handleGenerateCode}
+                        isLoading={isLoading}
+                    />}
+                </styles.LoginBox></styles.LoginBoxWrapper>
+            </>
     );
 };
 
@@ -97,11 +100,11 @@ interface GenerateCodeProps {
 
 const GenerateCodeForm = (props: GenerateCodeProps) => {
     return (
-        <div>
-            <h3>Reset your password</h3>
+        <>  
+            <styles.LoginTitle>Reset your password</styles.LoginTitle>
             {props.message !== "" && <Alert variant="dark">{props.message}</Alert>}
             <Form onSubmit={props.handleGenerateCode}>
-                <Form.Control
+                <styles.FormInputBox
                     type="email"
                     name="email"
                     value={props.email}
@@ -110,12 +113,20 @@ const GenerateCodeForm = (props: GenerateCodeProps) => {
                     required
                 />
                 <div>
-                    <Button type="submit" variant="dark">
-                        {props.isLoading && <Spinner animation="border" size="sm" as="span" />}Reset Password
-                    </Button>
+                    {props.isLoading ?
+                        <styles.LoginButton variant="primary" size="lg" className="square-corners" type="submit" block disabled>
+                            <Spinner animation="border" size="sm" as="span" />&nbsp;&nbsp;
+                            Reset Password
+                        </styles.LoginButton>
+                        :
+                        <styles.LoginButton variant="primary" size="lg" className="square-corners" block type="submit">
+                            Reset Password
+                        </styles.LoginButton>
+                    }
                 </div>
+                <styles.ReturnLink to={"/login"}>Return to sign in</styles.ReturnLink>
             </Form>
-        </div>
+        </>
     )
 }
 
@@ -130,12 +141,12 @@ interface ResetPasswordFormProps {
 
 const ResetPasswordForm = (props: ResetPasswordFormProps) => {
     return (
-        <div>
-            <h3>Enter verification code</h3>
+        <>  
+            <styles.LoginTitle>Enter verification code</styles.LoginTitle>
             {props.message !== "" && <Alert variant="dark">{props.message}</Alert>}
-            <p>Check your email for a code and enter it below.</p>
+            <styles.LoginSubtitle>Check your email for a code and enter it below.</styles.LoginSubtitle>
             <Form onSubmit={props.handleSavePassword}>
-                <Form.Control
+                <styles.FormInputBox
                     type="text"
                     name="code"
                     value={props.code}
@@ -143,7 +154,7 @@ const ResetPasswordForm = (props: ResetPasswordFormProps) => {
                     placeholder="Code"
                     required
                 />
-                <Form.Control
+                <styles.FormInputBox
                     type="password"
                     name="newPassword"
                     value={props.newPassword}
@@ -152,12 +163,20 @@ const ResetPasswordForm = (props: ResetPasswordFormProps) => {
                     required
                 />
                 <div>
-                    <Button type="submit" variant="dark">
-                        {props.isLoading && <Spinner animation="border" size="sm" as="span" />}&nbsp;&nbsp;Reset Password
-                    </Button>
+                    {props.isLoading ?
+                        <styles.LoginButton variant="primary" size="lg" className="square-corners" type="submit" block disabled>
+                            <Spinner animation="border" size="sm" as="span" />&nbsp;&nbsp;
+                            Reset Password
+                        </styles.LoginButton>
+                        :
+                        <styles.LoginButton variant="primary" size="lg" className="square-corners" block type="submit">
+                            Reset Password
+                        </styles.LoginButton>
+                    }
                 </div>
+                <styles.ReturnLink to={"/login"}>Return to sign in</styles.ReturnLink>
             </Form>
-        </div>
+        </>
     )
 }
 

@@ -6,7 +6,6 @@ import ProtectedRoute from './components/ProtectedRoute';
 // Pages
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
-import OTPInput from './components/OTP';
 import Login from './pages/Login';
 import ResetPassword from './pages/ResetPassword';
 
@@ -22,12 +21,9 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/" component={Home} />
-          <ProtectedRoute exact path="/dashboard" component={Dashboard} />
+          <ProtectedRoute path="/dashboard" component={Dashboard} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/reset-password" component={ResetPassword} />
-          <Route path="/otp">
-            <OTPInput numGroups={3} numInGroup={3} onComplete={(val: string) => { console.log(val) }} />
-          </Route>
         </Switch>
       </Router>
     </UserProvider>
