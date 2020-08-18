@@ -1,10 +1,6 @@
 import styled from 'styled-components';
 import Table from 'react-bootstrap/Table';
 
-interface ItemInformationProps {
-  grow: boolean
-}
-
 // Component styles
 export const ItemsTable = styled(Table)`
   text-align: center;

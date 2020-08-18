@@ -7,7 +7,7 @@ export const SingleOTPInputBox = styled.input`
   padding: 10px 20px;
   width: 1ch;
   border-radius: 5px;
-  border: 2px #aaaaaa solid;
+  border: 1px #aaaaaa solid;
   font-size 2em;
   font-weight: bold;
   &:first-child {
