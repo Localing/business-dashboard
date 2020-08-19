@@ -1,4 +1,5 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import * as styles from './styles/OrderListTableStyles';
 import * as dashboardStyles from './../styles/DashboardStyles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -23,12 +24,6 @@ interface OrderListTableProps {
 interface OrderStatusFiltersSchema {
   active: boolean,
   redeemed: boolean
-}
-
-const OrderExpand = () => {
-  return (
-    <styles.OrderExpand><FontAwesomeIcon icon={faExternalLinkAlt} /></styles.OrderExpand>
-  )
 }
 
 const OrderListTable:FunctionComponent<OrderListTableProps> = ({ data, ...rest}) => {
@@ -167,7 +162,9 @@ const OrderListTable:FunctionComponent<OrderListTableProps> = ({ data, ...rest})
                       <styles.OrderName>{order.customerName}</styles.OrderName>
                       <styles.OrderTotalPrice>{formatPrice(totalPrice(order.items))}</styles.OrderTotalPrice>
                     </styles.OrderInfoWrapper>
-                    <OrderExpand></OrderExpand>
+                    <Link to={`/dashboard/order/${order.orderID}`} >
+                      <styles.OrderExpand><FontAwesomeIcon icon={faExternalLinkAlt} /></styles.OrderExpand>
+                    </Link>
                   </styles.OrderTableOrder>
                   {
                     (infoBoxDisplays[index]) ?

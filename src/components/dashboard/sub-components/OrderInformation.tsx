@@ -13,7 +13,7 @@ interface OrderInformationProps {
     orderDate: string,
     redeemed: boolean,
     items: { name: string, quantity: number, price: number, imgUrl: string }[]
-  }
+  }|undefined
 }
 
 const OrderInformation:FunctionComponent<OrderInformationProps> = ({ data, ...rest}) => {
@@ -39,6 +39,10 @@ const OrderInformation:FunctionComponent<OrderInformationProps> = ({ data, ...re
       total += (item.price*item.quantity)
     );
     return total;
+  }
+
+  if (data === undefined) {
+    return null;
   }
   
   return (
