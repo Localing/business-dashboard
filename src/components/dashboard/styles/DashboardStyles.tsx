@@ -23,6 +23,12 @@ export const SectionTitle = styled.h2`
   border-bottom: 2px #aaaaaa solid;
 `;
 
+export const SectionTitleSmall = styled.span`
+  color: #343a40;
+  font-size: 1.1rem;
+  padding-left: 10px;
+`;
+
 export const ContentBlockWrapper = styled.div`
   margin: 30px 0;
 `;

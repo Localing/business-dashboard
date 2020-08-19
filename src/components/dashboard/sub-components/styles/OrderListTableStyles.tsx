@@ -224,4 +224,8 @@ export const OrderTotalPrice = styled.div`
 export const OrderExpand = styled.div`
   padding: 0 20px;
   color: #6c757d;
+
+  &:hover {
+    color: #343a40;
+  }
 `;

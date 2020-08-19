@@ -8,6 +8,7 @@ import MobileTopBar from '../components/MobileTopBar';
 import ActiveOrders from '../components/dashboard/ActiveOrders';
 import Home from '../components/dashboard/Home';
 import VerifyOrder from '../components/dashboard/VerifyOrder';
+import Order from '../components/dashboard/Order';
 
 import * as styles from './styles/DashboardStyles';
 
@@ -21,6 +22,7 @@ const Dashboard:FunctionComponent<any> = () => {
     }
 
     useEffect(() => {
+        // Hide sidebar on page change
         setSidebarDisplay(false);
 
     }, [location.pathname]);
@@ -37,6 +39,7 @@ const Dashboard:FunctionComponent<any> = () => {
                             <Route exact path={'/dashboard'} component={Home} />
                             <Route exact path={'/dashboard/verify'} component={VerifyOrder} />
                             <Route exact path={'/dashboard/orders'} component={ActiveOrders} />
+                            <Route exact path={'/dashboard/order/:order'} component={Order} />
                         </Switch>
                     </styles.ContentContainer>
                 </styles.Main>
