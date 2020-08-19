@@ -11,23 +11,38 @@ const status_colors: any = {
 // Component styles
 export const OrderListTableWrapper = styled.div`
   display: flex;
+  width: 100%;
+
+  @media (max-width: 1200px) {
+    display: block;
+  }
 `;
 
 export const FilterOptions = styled.div`
   width: 20%;
   padding: 10px;
+
+  @media (max-width: 1200px) {
+    width: 100%;
+  }
 `;
 
 export const FilterHeading = styled.div`
   font-weight: bold;
   font-size: 1.4rem;
   padding-bottom: 10px;
+
+  @media (max-width: 1200px) {
+    display: none;
+  }
   `;
   
 export const FilterSubheading = styled.div`
   font-weight: bold;
   font-size: 1rem;
   color: #000000;
+
+  margin: 5px 0;
 `;
 
 export const FilterSet = styled.div`
@@ -76,6 +91,10 @@ export const FilterToggleIconLarge = styled(FontAwesomeIcon)`
 export const Orders = styled.div`
   width: 80%;
   padding: 10px;
+
+  @media (max-width: 1200px) {
+    width: 100%;
+  }
 `;
 
 export const OrderSearch = styled.div`

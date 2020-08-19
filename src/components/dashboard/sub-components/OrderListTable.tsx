@@ -124,7 +124,6 @@ const OrderListTable:FunctionComponent<OrderListTableProps> = ({ data, ...rest})
   return (
     <>
       <dashboardStyles.InformationWrapper direction={'row'}>
-        <dashboardStyles.InformationSubBox>
           <styles.OrderListTableWrapper>
             <styles.FilterOptions>
               <styles.FilterHeading>Filters:</styles.FilterHeading>
@@ -181,7 +180,6 @@ const OrderListTable:FunctionComponent<OrderListTableProps> = ({ data, ...rest})
               </styles.OrderTable>
             </styles.Orders>
           </styles.OrderListTableWrapper>
-        </dashboardStyles.InformationSubBox>
       </dashboardStyles.InformationWrapper>
     </>
   )
