@@ -12,6 +12,7 @@ const status_colors: any = {
 export const OrderListTableWrapper = styled.div`
   display: flex;
   width: 100%;
+
   @media (max-width: 1200px) {
     display: block;
   }
@@ -30,6 +31,7 @@ export const FilterHeading = styled.div`
   font-weight: bold;
   font-size: 1.4rem;
   padding-bottom: 10px;
+
   @media (max-width: 1200px) {
     display: none;
   }
@@ -39,6 +41,7 @@ export const FilterSubheading = styled.div`
   font-weight: bold;
   font-size: 1rem;
   color: #000000;
+
   margin: 5px 0;
 `;
 

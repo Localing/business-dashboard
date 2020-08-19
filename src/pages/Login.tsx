@@ -17,11 +17,6 @@ const Login = (props: RouteComponentProps) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    const clearLoginFields = () => {
-        setUsername("");
-        setPassword("");
-    }
-
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         event.preventDefault();
         const { value, name } = event.target;
@@ -41,7 +36,6 @@ const Login = (props: RouteComponentProps) => {
     const handleLogin = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         userData.login(username, password);
-        clearLoginFields();
     }
 
     return (
