@@ -8,7 +8,7 @@ interface InformationWrapperProps {
 
 // Component styles
 export const DashboardContainer = styled(Container)`
-  padding: 50px;
+  padding: 20px 50px;
 
   @media (max-width: 720px) {
     padding: 20px;
