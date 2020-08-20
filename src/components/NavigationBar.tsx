@@ -13,10 +13,10 @@ const NavigationBar = () => {
 	
 	const formatBreadcrumb = (str: string): string => {
 		// Convert first character to uppercase
-		let str_return = str.charAt(0).toUpperCase() + str.slice(1);
+		let str_return: string = str.charAt(0).toUpperCase() + str.slice(1);
 
 		// Replace dashes with spaces
-		str_return = str_return.replaceAll('-',' ');
+		str_return = str_return.replace(/-/g,' ');
 		
 		return str_return;
 	}

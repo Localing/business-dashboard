@@ -42,7 +42,7 @@ export const BusinessName = styled.p`
   font-weight: bold;
   font-size: 1.4rem;
   margin: 0;
-  padding: 20px 20px;
+  padding: 40px 20px 20px 20px;
   color: #fff;
 
   @media (max-width: 720px) {
