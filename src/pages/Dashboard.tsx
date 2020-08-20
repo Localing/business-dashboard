@@ -9,6 +9,10 @@ import ActiveOrders from '../components/dashboard/ActiveOrders';
 import Home from '../components/dashboard/Home';
 import VerifyOrder from '../components/dashboard/VerifyOrder';
 import Order from '../components/dashboard/Order';
+import Product from '../components/dashboard/Product';
+import Products from '../components/dashboard/Products';
+import AddProduct from '../components/dashboard/AddProduct';
+import BusinessInformation from '../components/dashboard/BusinessInformation';
 
 import * as styles from './styles/DashboardStyles';
 
@@ -37,9 +41,13 @@ const Dashboard:FunctionComponent<any> = () => {
                     <styles.ContentContainer>
                         <Switch>
                             <Route exact path={'/dashboard'} component={Home} />
+                            <Route exact path={'/dashboard/business'} component={BusinessInformation} />
                             <Route exact path={'/dashboard/verify'} component={VerifyOrder} />
                             <Route exact path={'/dashboard/orders'} component={ActiveOrders} />
                             <Route exact path={'/dashboard/order/:order'} component={Order} />
+                            <Route exact path={'/dashboard/products'} component={Products} />
+                            <Route exact path={'/dashboard/add-product'} component={AddProduct} />
+                            <Route exact path={'/dashboard/product/:product'} component={Product} />
                         </Switch>
                     </styles.ContentContainer>
                 </styles.Main>
