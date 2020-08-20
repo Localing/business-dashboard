@@ -32,6 +32,7 @@ export const Sidebar = styled(({sidebarShow, ...rest}) => <Col {...rest}/>)`
 export const SidebarToggleMobile = styled.span`
   display: none;
   cursor: pointer;
+  color: #48576c;
 
   @media (max-width: 720px) {
     display: inline-block;
