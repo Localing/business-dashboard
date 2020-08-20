@@ -47,7 +47,7 @@ const NavigationBar = () => {
                         <styles.Account>
                             Account: <styles.AccountName>{userData.user.attributes.email}</styles.AccountName>
                         </styles.Account>
-                        <styles.LogoutButton variant="outline-secondary" onClick={() => userData.logout()}>
+                        <styles.LogoutButton onClick={() => userData.logout()}>
                             <FontAwesomeIcon icon={faSignOutAlt} /> Sign Out
                         </styles.LogoutButton>
                     </Fragment>

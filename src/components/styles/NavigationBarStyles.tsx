@@ -35,7 +35,8 @@ export const BreadcrumbDivider = styled(FontAwesomeIcon)`
 export const Account = styled.p`
   color: #6c757d;
   font-weight: 600;
-  margin: 0;
+  margin: 0;  
+  padding: 0 30px;
 `;
 
 export const AccountName = styled.span`
@@ -43,6 +44,14 @@ export const AccountName = styled.span`
   font-weight: 600;
 `;
 
-export const LogoutButton = styled(Button)`
-  margin-left: 20px;
+export const LogoutButton = styled.p`
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #6c757d;
+  margin: 0;
+
+  &:hover {
+    color: #343a40;
+  }
 `;
