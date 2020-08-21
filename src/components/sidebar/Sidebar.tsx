@@ -34,8 +34,8 @@ const Sidebar = (props: SidebarProps) => {
                   <SidebarLink
                     icon={faStore}
                     text={'Business Information'}
-                    to={'/dashboard/business'}
-                    active={(props.activePage === 'business')}
+                    to={'/dashboard/business-information'}
+                    active={(props.activePage === 'business-information')}
                   />
                 </styles.NavigationSection>
                 <styles.NavigationSection>
@@ -47,7 +47,7 @@ const Sidebar = (props: SidebarProps) => {
                   />
                   <SidebarLink
                     icon={faTags}
-                    text={'Active Orders'}
+                    text={'Orders'}
                     to={'/dashboard/orders'}
                     active={(props.activePage === 'orders')}
                   />
@@ -61,7 +61,7 @@ const Sidebar = (props: SidebarProps) => {
                   />
                   <SidebarLink
                     icon={faBoxOpen}
-                    text={'View Products'}
+                    text={'Products'}
                     to={'/dashboard/products'}
                     active={(props.activePage === 'products')}
                   />

@@ -40,7 +40,7 @@ const OrderListTable:FunctionComponent<OrderListTableProps> = ({ data, ...rest})
   });
 
   const formatDate = (dateStr: string) => {
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const options = { day: 'numeric', month: 'numeric',  year: 'numeric' };
     let date = new Date(0); 
     date.setUTCSeconds(Number(dateStr));
     return date.toLocaleDateString('en-GB', options);

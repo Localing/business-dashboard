@@ -43,6 +43,7 @@ export const Information = styled.p`
 
 export const InformationSubBox = styled.div`
   border: 1px #cccccc solid;
+  background-color: #fff;
   padding: 20px;
   width: 100%;
   border-radius: 10px;

@@ -71,13 +71,16 @@ export const LogoutIcon = styled(FontAwesomeIcon)`
 
 export const LogoutText = styled.p`
   color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  
   background-image: linear-gradient(to left, #007bff 50%, rgba(0,0,0,0) 50%);
   background-size: 200% 100%;
+  transition: background-position 0.5s ease;
 
   border-radius: 3px;
   padding: 10px 20px;
   margin: 2px 0;
-  transition: background-position 0.5s ease;
 
   & > ${LogoutIcon} {
     color: #48576c; 
@@ -91,9 +94,6 @@ export const LogoutText = styled.p`
     }
   }
 
-  cursor: pointer;
-  color: #fff;
-  margin: 0;
   @media (max-width: 720px) {
     font-size: 1.2rem;
   }

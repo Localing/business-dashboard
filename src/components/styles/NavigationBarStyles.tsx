@@ -15,6 +15,7 @@ export const StyledNavbar = styled(Navbar)`
 
 export const Breadcrumbs = styled.p`
   font-weight: 600;
+  margin: 10px 0;
 `;
 
 export const BreadcrumbInactive = styled.span`

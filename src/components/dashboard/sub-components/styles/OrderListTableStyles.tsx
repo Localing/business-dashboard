@@ -190,6 +190,10 @@ export const OrderInfoBox = styled(({ firstBox, ...rest })  => <div {...rest} />
 export const OrderInfoWrapper = styled.div`
   flex-grow: 1;
   padding: 0 30px;
+
+  @media (max-width: 1200px) {
+    padding: 0 10px;
+  }
 `;
 
 interface OrderStatusProps {
@@ -207,6 +211,10 @@ export const OrderDate = styled.div`
   font-weight: bold;
   padding: 0 10px;
   width: 30%;
+
+  @media (max-width: 1200px) {
+    width: auto;
+  }
 `;
 
 export const OrderName = styled.div`
@@ -214,6 +222,10 @@ export const OrderName = styled.div`
   padding: 0 10px;
   display: inline-block;
   width: 50%;
+
+  @media (max-width: 1200px) {
+    width: auto;
+  }
 `;
 
 export const OrderTotalPrice = styled.div`
@@ -227,5 +239,9 @@ export const OrderExpand = styled.div`
 
   &:hover {
     color: #343a40;
+  }
+  
+  @media (max-width: 1200px) {
+    padding: 0 10px;
   }
 `;

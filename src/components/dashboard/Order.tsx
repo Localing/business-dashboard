@@ -38,6 +38,14 @@ const Order:FunctionComponent<OrderProps> = () => {
     }
   }
 
+  const formatDate = (dateStr: string|undefined) => {
+    if ( dateStr === undefined) return '';
+    const options = { month: 'long', day: 'numeric', year: 'numeric' };
+    let date = new Date(0); 
+    date.setUTCSeconds(Number(dateStr));
+    return date.toLocaleDateString('en-GB', options);
+  }
+
   useEffect(() => {
     // Fetch data on page load
 
@@ -49,7 +57,7 @@ const Order:FunctionComponent<OrderProps> = () => {
 
   return (
     <dashboardStyles.DashboardContainer fluid>
-      <dashboardStyles.SectionTitle>Order <dashboardStyles.SectionTitleSmall>({orderData?.orderID})</dashboardStyles.SectionTitleSmall></dashboardStyles.SectionTitle>
+      <dashboardStyles.SectionTitle>Order <dashboardStyles.SectionTitleSmall>({orderData?.customerName} - {formatDate(orderData?.orderDate)})</dashboardStyles.SectionTitleSmall></dashboardStyles.SectionTitle>
       <dashboardStyles.ContentBlockWrapper>
         <dashboardStyles.InformationWrapper direction={'row'}>
           <OrderInformation data={orderData}></OrderInformation> 

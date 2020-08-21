@@ -41,7 +41,7 @@ const Dashboard:FunctionComponent<any> = () => {
                     <styles.ContentContainer>
                         <Switch>
                             <Route exact path={'/dashboard'} component={Home} />
-                            <Route exact path={'/dashboard/business'} component={BusinessInformation} />
+                            <Route exact path={'/dashboard/business-information'} component={BusinessInformation} />
                             <Route exact path={'/dashboard/verify'} component={VerifyOrder} />
                             <Route exact path={'/dashboard/orders'} component={ActiveOrders} />
                             <Route exact path={'/dashboard/order/:order'} component={Order} />

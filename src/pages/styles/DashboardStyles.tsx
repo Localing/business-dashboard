@@ -12,6 +12,8 @@ export const Main = styled(Col)`
   padding: 0;
   margin-left: calc( 100% * (1 / 6) );
   width: calc( 100vw * (5/6));
+  
+  min-height: 100vh;
 
   @media (max-width: 1200px) {
     width: 75vw;
