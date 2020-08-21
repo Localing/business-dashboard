@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faCalculator, faTags, faBars, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faCalculator, faTags, faBars, faSignOutAlt, faBoxOpen, faPlusCircle, faStore } from '@fortawesome/free-solid-svg-icons';
 import { useUserData } from '../../UserContext';
 import SidebarLink from './SidebarLink';
 import * as styles from './styles/SidebarStyles';
@@ -32,6 +32,14 @@ const Sidebar = (props: SidebarProps) => {
                 </styles.NavigationSection>
                 <styles.NavigationSection>
                   <SidebarLink
+                    icon={faStore}
+                    text={'Business Information'}
+                    to={'/dashboard/business-information'}
+                    active={(props.activePage === 'business-information')}
+                  />
+                </styles.NavigationSection>
+                <styles.NavigationSection>
+                  <SidebarLink
                     icon={faCalculator}
                     text={'Verify Order'}
                     to={'/dashboard/verify'}
@@ -39,9 +47,23 @@ const Sidebar = (props: SidebarProps) => {
                   />
                   <SidebarLink
                     icon={faTags}
-                    text={'Active Orders'}
+                    text={'Orders'}
                     to={'/dashboard/orders'}
                     active={(props.activePage === 'orders')}
+                  />
+                </styles.NavigationSection>
+                <styles.NavigationSection>
+                  <SidebarLink
+                    icon={faPlusCircle}
+                    text={'Add Product'}
+                    to={'/dashboard/add-product'}
+                    active={(props.activePage === 'add-product')}
+                  />
+                  <SidebarLink
+                    icon={faBoxOpen}
+                    text={'Products'}
+                    to={'/dashboard/products'}
+                    active={(props.activePage === 'products')}
                   />
                 </styles.NavigationSection>
               </div>

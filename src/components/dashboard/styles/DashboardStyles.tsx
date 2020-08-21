@@ -8,7 +8,7 @@ interface InformationWrapperProps {
 
 // Component styles
 export const DashboardContainer = styled(Container)`
-  padding: 50px;
+  padding: 20px 50px;
 
   @media (max-width: 720px) {
     padding: 20px;
@@ -43,6 +43,7 @@ export const Information = styled.p`
 
 export const InformationSubBox = styled.div`
   border: 1px #cccccc solid;
+  background-color: #fff;
   padding: 20px;
   width: 100%;
   border-radius: 10px;
