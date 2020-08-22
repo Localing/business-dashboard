@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import * as styles from './styles/OrderListTableStyles';
+import * as tableStyles from './styles/TableStyles';
 import * as dashboardStyles from './../styles/DashboardStyles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faCircle, faExternalLinkAlt, faCheckSquare } from '@fortawesome/free-solid-svg-icons';
@@ -29,7 +30,7 @@ interface OrderStatusFiltersSchema {
 const OrderListTable:FunctionComponent<OrderListTableProps> = ({ data, ...rest}) => {
   
   const [searchText, setSearchText] = useState<string>('');
-  const [orderSearchIcon, setOrderSearchIcon] = useState(faSearch);
+  const [searchIcon, setSearchIcon] = useState(faSearch);
   const [displayData, setDisplayData] = useState<OrderSchema[]>([]);
   const [infoBoxDisplays, setInfoBoxDisplays] = useState<boolean[]>([]);
   
@@ -119,43 +120,43 @@ const OrderListTable:FunctionComponent<OrderListTableProps> = ({ data, ...rest})
   return (
     <>
       <dashboardStyles.InformationWrapper direction={'row'}>
-          <styles.OrderListTableWrapper>
-            <styles.FilterOptions>
-              <styles.FilterHeading>Filters:</styles.FilterHeading>
-              <styles.FilterSet>
-                <styles.FilterSubheading>Order status:</styles.FilterSubheading>
-                <styles.FilterToggle active={orderStatusFilters.active} onClick={() => handleOrderStatusFilters('active')}>
+          <tableStyles.TableWrapper>
+            <tableStyles.FilterOptions>
+              <tableStyles.FilterHeading>Filters:</tableStyles.FilterHeading>
+              <tableStyles.FilterSet>
+                <tableStyles.FilterSubheading>Order status:</tableStyles.FilterSubheading>
+                <tableStyles.FilterToggle active={orderStatusFilters.active} onClick={() => handleOrderStatusFilters('active')}>
                   {
                   orderStatusFilters.active 
-                  ? <><styles.FilterToggleIconLarge icon={faCheckSquare} /><span>Active</span></> 
+                  ? <><tableStyles.FilterToggleIconLarge icon={faCheckSquare} /><span>Active</span></> 
                   : checkAllFilters(orderStatusFilters) ? 
-                  <><styles.FilterToggleIconDefault icon={faCircle} keyColor={'active'} /><span>Active</span></>
-                  : <><styles.FilterToggleIconLarge icon={farSquare} /><span>Active</span></> 
+                  <><tableStyles.FilterToggleIconDefault icon={faCircle} keyColor={'active'} /><span>Active</span></>
+                  : <><tableStyles.FilterToggleIconLarge icon={farSquare} /><span>Active</span></> 
                   }
-                </styles.FilterToggle>
-                <styles.FilterToggle active={orderStatusFilters.redeemed} onClick={() => handleOrderStatusFilters('redeemed')}>
+                </tableStyles.FilterToggle>
+                <tableStyles.FilterToggle active={orderStatusFilters.redeemed} onClick={() => handleOrderStatusFilters('redeemed')}>
                   {
                     orderStatusFilters.redeemed 
-                    ? <><styles.FilterToggleIconLarge icon={faCheckSquare} /> Redeemed</> 
+                    ? <><tableStyles.FilterToggleIconLarge icon={faCheckSquare} /> Redeemed</> 
                     : checkAllFilters(orderStatusFilters) ? 
-                    <><styles.FilterToggleIconDefault icon={faCircle} keyColor={'redeemed'} /> Redeemed</> 
-                    : <><styles.FilterToggleIconLarge icon={farSquare} /> Redeemed</> 
+                    <><tableStyles.FilterToggleIconDefault icon={faCircle} keyColor={'redeemed'} /> Redeemed</> 
+                    : <><tableStyles.FilterToggleIconLarge icon={farSquare} /> Redeemed</> 
                   }
-                </styles.FilterToggle>
-              </styles.FilterSet>
-            </styles.FilterOptions>
-            <styles.Orders>
-              <styles.OrderSearch>
-                <styles.OrderInput placeholder={"Search..."} value={searchText} onChange={e => setSearchText(e.target.value)} />
-                <styles.OrderSearchIcon icon={orderSearchIcon} />
-              </styles.OrderSearch>
+                </tableStyles.FilterToggle>
+              </tableStyles.FilterSet>
+            </tableStyles.FilterOptions>
+            <tableStyles.DataDisplay>
+              <tableStyles.TableSearch>
+                <tableStyles.TableSearchInput placeholder={"Search..."} value={searchText} onChange={e => setSearchText(e.target.value)} />
+                <tableStyles.TableSearchIcon icon={searchIcon} />
+              </tableStyles.TableSearch>
               <dashboardStyles.InformationSubHeading>
                 Orders ({displayData.length})
               </dashboardStyles.InformationSubHeading>
-              <styles.OrderTable>
+              <tableStyles.Table>
                 {displayData.map((order, index) => 
-                <styles.OrderItemWrapper separateBox={infoBoxDisplays[index]}>
-                  <styles.OrderTableOrder finalBox={(index + 1 === displayData.length) && infoBoxDisplays[index]} onClick={() => handleOrderInfoBoxToggle(index)} >
+                <tableStyles.TableItemWrapper separateBox={infoBoxDisplays[index]}>
+                  <tableStyles.TableItem finalBox={(index + 1 === displayData.length) && infoBoxDisplays[index]} onClick={() => handleOrderInfoBoxToggle(index)} >
                     <styles.OrderStatus status={order.redeemed ? "redeemed" : "active"} ><FontAwesomeIcon icon={faCircle} /></styles.OrderStatus>
                     <styles.OrderDate>{formatDate(order.orderDate)}</styles.OrderDate>
                     <styles.OrderInfoWrapper>
@@ -165,18 +166,18 @@ const OrderListTable:FunctionComponent<OrderListTableProps> = ({ data, ...rest})
                     <Link to={`/dashboard/order/${order.orderID}`} >
                       <styles.OrderExpand><FontAwesomeIcon icon={faExternalLinkAlt} /></styles.OrderExpand>
                     </Link>
-                  </styles.OrderTableOrder>
+                  </tableStyles.TableItem>
                   {
                     (infoBoxDisplays[index]) ?
-                    <styles.OrderInfoBox firstBox={(index === 0)}>
+                    <tableStyles.ItemInfoBox firstBox={(index === 0)}>
                       <OrderInformation data={order} />
-                    </styles.OrderInfoBox> : null
+                    </tableStyles.ItemInfoBox> : null
                   }
-                  </styles.OrderItemWrapper>
+                  </tableStyles.TableItemWrapper>
                 )}
-              </styles.OrderTable>
-            </styles.Orders>
-          </styles.OrderListTableWrapper>
+              </tableStyles.Table>
+            </tableStyles.DataDisplay>
+          </tableStyles.TableWrapper>
       </dashboardStyles.InformationWrapper>
     </>
   )

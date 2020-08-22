@@ -16,7 +16,7 @@ interface OrderSchema {
   items: { name: string, quantity: number, price: number, imgUrl: string }[]
 }
 
-const ActiveOrders = () => {
+const Orders = () => {
   const [data, setData] = useState<OrderSchema[]>([])
 
   const getData = () => {
@@ -89,7 +89,7 @@ const ActiveOrders = () => {
 
   return (
     <dashboardStyles.DashboardContainer fluid>
-      <dashboardStyles.SectionTitle>Active Orders</dashboardStyles.SectionTitle>
+      <dashboardStyles.SectionTitle>Orders</dashboardStyles.SectionTitle>
       <dashboardStyles.ContentBlockWrapper>
         <OrderListTable data={data}></OrderListTable>
       </dashboardStyles.ContentBlockWrapper>
@@ -97,4 +97,4 @@ const ActiveOrders = () => {
   )
 }
 
-export default ActiveOrders;
+export default Orders;

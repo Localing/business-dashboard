@@ -6,7 +6,7 @@ import Row from 'react-bootstrap/Row';
 import NavigationBar from '../components/NavigationBar';
 import Sidebar from '../components/sidebar/Sidebar';
 import MobileTopBar from '../components/MobileTopBar';
-import ActiveOrders from '../components/dashboard/ActiveOrders';
+import Orders from '../components/dashboard/Orders';
 import Home from '../components/dashboard/Home';
 import VerifyOrder from '../components/dashboard/VerifyOrder';
 import Order from '../components/dashboard/Order';
@@ -47,7 +47,7 @@ const Dashboard:FunctionComponent<any> = () => {
                   <Route exact path={'/dashboard'} component={Home} />
                   <Route exact path={'/dashboard/business-information'} component={BusinessInformation} />
                   <Route exact path={'/dashboard/verify'} component={VerifyOrder} />
-                  <Route exact path={'/dashboard/orders'} component={ActiveOrders} />
+                  <Route exact path={'/dashboard/orders'} component={Orders} />
                   <Route exact path={'/dashboard/order/:order'} component={Order} />
                   <Route exact path={'/dashboard/products'} component={Products} />
                   <Route exact path={'/dashboard/add-product'} component={AddProduct} />
