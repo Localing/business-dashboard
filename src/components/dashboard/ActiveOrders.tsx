@@ -4,7 +4,7 @@ import * as dashboardStyles from './styles/DashboardStyles';
 
 import OrderListTable from './sub-components/OrderListTable';
 
-import API from '../services/API';
+import API from '../../services/API';
 
 interface OrderSchema {
   customerName: string,

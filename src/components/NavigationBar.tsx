@@ -4,11 +4,11 @@ import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import { faSignOutAlt, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useUserData } from '../UserContext';
+import { useUserData } from '../contexts/UserContext';
 import * as styles from './styles/NavigationBarStyles';
 
 const NavigationBar = () => {
-    const userData = useUserData();
+	const userData = useUserData();
 	const location = useLocation();
 	
 	const formatBreadcrumb = (str: string): string => {
