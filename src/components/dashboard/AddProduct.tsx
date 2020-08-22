@@ -40,7 +40,7 @@ const AddProduct = () => {
 
   // Pricing
   const [productPrice, setProductPrice] = useState('0.00');
-  const [productDiscount, setProductDiscount] = useState('0.00');
+  const [productDiscount, setProductDiscount] = useState('0');
   const [productCurrency, setProductCurrency] = useState('GBP'); // Don't need to set at the moment
 
   // Images
@@ -82,6 +82,10 @@ const AddProduct = () => {
         return;
       }
     } else if (activeStage === 2) {
+      if (imageSrc === undefined) {
+        setErrorMessage('Please upload an image');
+        return;
+      }
       await createCroppedImage();
       setShowNextButton(false);
       setShowCompleteButton(true);
@@ -91,14 +95,22 @@ const AddProduct = () => {
   }
 
   const previousStage = () => {
+    if (activeStage === 0) {
+      return;
+    } else if (activeStage === 1) {
+      setShowBackButton(false);
+    } else if (activeStage === 3) {
+      setShowCompleteButton(false);
+      setShowNextButton(true);
+    }
     setActiveStage(activeStage - 1);
   }
 
   const completeForm = async () => {
     let data = {
       "businessId": userData.user?.attributes.sub,
-      "price": (parseFloat(productPrice) * 100),
-      "discount": (parseFloat(productDiscount) * 100),
+      "price": (Math.round(parseFloat(productPrice) * 100)),
+      "discount": (parseFloat(productDiscount)),
       "currency": "GBP",
       "active": true,
       "name": productName,
@@ -117,6 +129,7 @@ const AddProduct = () => {
       setProductPrice('0.00');
       setProductDiscount('0.00');
       setActiveStage(0);
+      setImageSrc(undefined);
       setCrop({ x: 0, y: 0 });
       setZoom(1);
       setCroppedImage(undefined);
@@ -197,7 +210,7 @@ const AddProduct = () => {
           {
             (activeStage === 1) ? <styles.FormBox>
               <styles.SingleInput>
-                <styles.InputLabel>Product Price (GBP)</styles.InputLabel>
+                <styles.InputLabel>Pre-Sale Price (GBP)</styles.InputLabel>
                 <styles.InputInput 
                   type="number"
                   step="0.01"
@@ -207,15 +220,15 @@ const AddProduct = () => {
                 />
               </styles.SingleInput>
               <styles.SingleInput>
-                <styles.InputLabel>Product Discount (GBP)</styles.InputLabel>
+                <styles.InputLabel>Discount (%)</styles.InputLabel>
                 <styles.InputInput
                 type="number"
-                step="0.01"
                 value={productDiscount}
                 onChange={e => setProductDiscount(e.target.value)}
-                onBlur={() => fixDecimalPlaces(productDiscount, setProductDiscount)}
               />
               </styles.SingleInput>
+              <styles.FieldName>Customer Pays:</styles.FieldName>
+              <styles.FieldValue>£{(parseFloat(productPrice)*(1 - parseFloat(productDiscount)/100)).toFixed(2)}</styles.FieldValue>
             </styles.FormBox>
              : null
           }
@@ -263,7 +276,7 @@ const AddProduct = () => {
                 </styles.ConfirmationField>
                 <styles.ConfirmationField>
                   <styles.FieldName>Discount</styles.FieldName>
-                  <styles.FieldValue>£{parseFloat(productDiscount).toFixed(2)}</styles.FieldValue>
+                  <styles.FieldValue>{parseFloat(productDiscount)}%</styles.FieldValue>
                 </styles.ConfirmationField>
                 {(croppedImage) ?
                   <styles.ConfirmationField>
