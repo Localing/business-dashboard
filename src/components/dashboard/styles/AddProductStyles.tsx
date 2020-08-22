@@ -15,7 +15,10 @@ export const SingleInput = styled.div`
 export const InputLabel = styled.p`
   margin: 0;
   font-weight: 600;
-  
+`;
+
+export const InputLabelSubtitle = styled.p`
+  margin: 0;
 `;
 
 export const InputInput = styled.input`

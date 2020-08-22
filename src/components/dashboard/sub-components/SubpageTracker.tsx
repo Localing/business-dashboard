@@ -6,10 +6,7 @@ import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { faCircle as farCircle } from '@fortawesome/free-regular-svg-icons';
 
 interface SubpageTrackerProps {
-  stages: {
-    number: number,
-    name: string
-  }[],
+  stages: string[],
   activeStage: number
 }
 
@@ -61,7 +58,7 @@ const SubpageTracker:FunctionComponent<SubpageTrackerProps> = ({ stages, activeS
           {`Stage ${String(Math.min(activeStage + 1, stages.length))} of ${String(stages.length)}`}
         </styles.StageNum>
         <styles.StageName>
-          {stages[activeStage]?.name ? stages[activeStage].name : 'Completed'}
+          {stages[activeStage] ? stages[activeStage] : 'Completed'}
         </styles.StageName>
       </styles.TextRow>
   </styles.SubpageTracker>

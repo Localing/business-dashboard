@@ -15,22 +15,11 @@ const AddProduct = () => {
   // Page staging
   const [activeStage, setActiveStage] = useState(0);
   const stages = [
-    {
-      number: 1,
-      name: 'Primary Details'
-    },
-    {
-      number: 2,
-      name: 'Pricing'
-    },
-    {
-      number: 3,
-      name: 'Images'
-    },
-    {
-      number: 4,
-      name: 'Confirmation'
-    }
+      'Primary Details',
+      'Pricing',
+      'Images',
+      'Stock',
+      'Confirmation'
   ];
 
   // Input boxes for form
@@ -48,6 +37,9 @@ const AddProduct = () => {
   const [imageSrc, setImageSrc] = useState<string|undefined>(undefined);
   
   const [errorMessage, setErrorMessage] = useState('');
+
+  // Stock 
+  const [stock, setStock] = useState('1');
 
   // Navigation buttons
   const [showNextButton, setShowNextButton] = useState(true);
@@ -87,6 +79,8 @@ const AddProduct = () => {
         return;
       }
       await createCroppedImage();
+
+    } else if (activeStage === 3) {
       setShowNextButton(false);
       setShowCompleteButton(true);
     }
@@ -113,10 +107,11 @@ const AddProduct = () => {
       "discount": (parseFloat(productDiscount)),
       "currency": "GBP",
       "active": true,
+      "stock": (Math.round(parseFloat(stock))),
       "name": productName,
       "description": productDescription,
       "images": [
-          
+          "https://localingimagefrontenddevtemp.s3.eu-west-2.amazonaws.com/pizza.jpg"
       ]
     }
     try {
@@ -259,7 +254,18 @@ const AddProduct = () => {
           }
 
           {
-            (activeStage === 3) ? 
+            (activeStage === 3) ? <styles.FormBox>
+              <styles.SingleInput>
+                <styles.InputLabel>Max purchase quantity (number able to be added to cart)</styles.InputLabel>
+                <styles.InputLabelSubtitle>(0 sets as out of stock)</styles.InputLabelSubtitle>
+                <styles.InputInput type="number" value={stock} onChange={e => {setStock(e.target.value)}} />
+              </styles.SingleInput>
+            </styles.FormBox>
+             : null
+          }
+
+          {
+            (activeStage === 4) ? 
               <>
                 <styles.ConfirmationText>Confirm Details</styles.ConfirmationText>
                 <styles.ConfirmationField>
@@ -277,6 +283,10 @@ const AddProduct = () => {
                 <styles.ConfirmationField>
                   <styles.FieldName>Discount</styles.FieldName>
                   <styles.FieldValue>{parseFloat(productDiscount)}%</styles.FieldValue>
+                </styles.ConfirmationField>
+                <styles.ConfirmationField>
+                  <styles.FieldName>Max purchase quantity</styles.FieldName>
+                  <styles.FieldValue>{stock}</styles.FieldValue>
                 </styles.ConfirmationField>
                 {(croppedImage) ?
                   <styles.ConfirmationField>
