@@ -1,10 +1,12 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useState, useCallback } from 'react';
 import * as styles from './styles/AddProductStyles';
 import * as dashboardStyles from './styles/DashboardStyles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowCircleRight, faArrowCircleLeft, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import Cropper from 'react-easy-crop';
 import SubpageTracker from './sub-components/SubpageTracker';
 import API from './../../services/API';
+import { getCroppedImg } from './../../services/canvasUtils';
 import { useUserData } from '../../contexts/UserContext';
 
 const AddProduct = () => {
@@ -43,8 +45,14 @@ const AddProduct = () => {
 
   // Images
   const [productImages, setProductImages] = useState<string[]>([]);
-
+  const [imageSrc, setImageSrc] = useState<string|undefined>(undefined);
+  
   const [errorMessage, setErrorMessage] = useState('');
+
+  // Navigation buttons
+  const [showNextButton, setShowNextButton] = useState(true);
+  const [showBackButton, setShowBackButton] = useState(false);
+  const [showCompleteButton, setShowCompleteButton] = useState(false);
 
   const fixDecimalPlaces = (val: string, setFunction: (new_val: string) => void) => {
     let num = parseFloat(val);
@@ -57,12 +65,14 @@ const AddProduct = () => {
     console.log(val, setFunction,cleannum);
   }
 
-  const nextStage = () => {
+  const nextStage = async () => {
     // Check fields filled in
     if (activeStage === 0) {
       if (productName === '' || productDescription === '') {
         setErrorMessage('Please fill in empty fields');
         return;
+      } else {
+        setShowBackButton(true);
       }
     } else if (activeStage === 1) {
       fixDecimalPlaces(productPrice, setProductPrice);
@@ -71,6 +81,10 @@ const AddProduct = () => {
         setErrorMessage('Please specify a non-zero price');
         return;
       }
+    } else if (activeStage === 2) {
+      await createCroppedImage();
+      setShowNextButton(false);
+      setShowCompleteButton(true);
     }
     setErrorMessage('');
     setActiveStage(activeStage + 1);
@@ -103,10 +117,61 @@ const AddProduct = () => {
       setProductPrice('0.00');
       setProductDiscount('0.00');
       setActiveStage(0);
+      setCrop({ x: 0, y: 0 });
+      setZoom(1);
+      setCroppedImage(undefined);
+      setCroppedAreaPixels(null);
+      setShowCompleteButton(false);
+      setShowNextButton(true);
+      setShowBackButton(false);
     } catch (err) {
       console.log(err);
     }
   }
+
+  // Image cropper
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+  const [croppedImage, setCroppedImage] = useState<string|undefined>(undefined);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState<any>(null);
+
+  const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
+    setCroppedAreaPixels(croppedAreaPixels)
+  }, [])
+  
+  const readFile = (file: any): Promise<string> => {
+    return new Promise(resolve => {
+      const reader: any = new FileReader()
+      reader.addEventListener('load', () => resolve(reader.result), false)
+      reader.readAsDataURL(file)
+    })
+  }
+
+  const onFileChange = async (e: any) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const file = e.target.files[0];
+      let imageDataUrl: string = await readFile(file);
+      console.log(imageDataUrl);
+
+      setImageSrc(imageDataUrl);
+    }
+  }
+
+  const createCroppedImage = useCallback(async () => {
+    try {
+      if (croppedAreaPixels) {
+        const croppedImage = await getCroppedImg(
+          imageSrc,
+          croppedAreaPixels,
+          500,
+          500
+        )
+        setCroppedImage(croppedImage);
+      }
+    } catch (e) {
+      console.error(e)
+    }
+  }, [imageSrc, croppedAreaPixels]);
 
   return (
     <dashboardStyles.DashboardContainer fluid>
@@ -157,7 +222,26 @@ const AddProduct = () => {
 
           {
             (activeStage === 2) ? 
-              <p>Image uploading not currently supported</p>
+              (imageSrc) ?
+              <styles.ImageCropperWrapper>
+                <Cropper
+                  image={imageSrc}
+                  crop={crop}
+                  zoom={zoom}
+                  aspect={1 / 1}
+                  onCropChange={setCrop}
+                  onCropComplete={onCropComplete}
+                  onZoomChange={setZoom}
+                />
+              </styles.ImageCropperWrapper>
+              : <styles.FormBox>
+                <styles.InputLabel>Choose image</styles.InputLabel>
+                <styles.InputFile
+                  type="file"
+                  accept="image/png, image/jpeg"
+                  onChange={onFileChange}
+                />
+              </styles.FormBox>
              : null
           }
 
@@ -181,6 +265,12 @@ const AddProduct = () => {
                   <styles.FieldName>Discount</styles.FieldName>
                   <styles.FieldValue>£{parseFloat(productDiscount).toFixed(2)}</styles.FieldValue>
                 </styles.ConfirmationField>
+                {(croppedImage) ?
+                  <styles.ConfirmationField>
+                    <styles.FieldName>Image</styles.FieldName>
+                    <styles.FieldValue><styles.FieldImage src={croppedImage} /></styles.FieldValue>
+                  </styles.ConfirmationField> : null
+                }
               </>
              : null
           }
@@ -189,21 +279,20 @@ const AddProduct = () => {
           <styles.ErrorMessage>{errorMessage}</styles.ErrorMessage>
           : null}
           <styles.NavigationButtonGroup>
-            { ((activeStage +1) !== stages.length) ? 
+            { (showNextButton) ? 
             <styles.NextButton variant='outline-primary' onClick={() => nextStage()}>
               Next&nbsp;&nbsp;
               <FontAwesomeIcon icon={faArrowCircleRight} />
-            </styles.NextButton>
-            : <styles.CompleteButton onClick={() => completeForm()}>
+            </styles.NextButton> : null }
+            { (showCompleteButton) ? <styles.CompleteButton onClick={() => completeForm()}>
               Complete&nbsp;&nbsp;
               <FontAwesomeIcon icon={faCheckCircle} />
-            </styles.CompleteButton>}
-            { (activeStage !== 0) ?
+            </styles.CompleteButton> : null }
+            { (showBackButton) ?
             <styles.BackButton variant='outline-secondary' onClick={() => previousStage()}>
               <FontAwesomeIcon icon={faArrowCircleLeft} />
               &nbsp;&nbsp;Back
-            </styles.BackButton>
-             : null}
+            </styles.BackButton>: null}
           </styles.NavigationButtonGroup>
         </dashboardStyles.InformationSubBox>
       </dashboardStyles.InformationWrapper>

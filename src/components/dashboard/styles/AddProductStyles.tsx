@@ -37,6 +37,8 @@ export const InputTextarea = styled.textarea`
   padding: 10px 20px;
 `;
 
+export const InputFile = styled.input``;
+
 export const ConfirmationText = styled.p`
   margin: 0;
   font-weight: 600;
@@ -44,21 +46,42 @@ export const ConfirmationText = styled.p`
   margin-bottom: 10px;
 `;
 
-export const ConfirmationField = styled.p`
-  margin: 0;
+export const ConfirmationField = styled.div`
+  margin: 10px 0;
 `;
 
-export const FieldName = styled.span`
+export const FieldName = styled.p`
   font-weight: bold;
   margin-right: 5px;
+  margin: 0;
+  font-size: 1.2rem;
 `;
 
-export const FieldValue = styled.span``;
+export const FieldValue = styled.div`
+  width: 100%;
+`;
+
+export const FieldImage = styled.img`
+  width: 500px;
+  max-width: 100%;
+`;
 
 export const ErrorMessage = styled.div`
   color: #dc3545;
   font-weight: 600;
   margin: 10px 0;
+`;
+
+export const ImageCropperWrapper = styled.div`
+  overflow: hidden;
+  width: 100%;
+  height: 500px;
+  display: flex;
+  position: relative;
+
+  @media (max-width: 720px) {
+    height: 80vw;
+  }
 `;
 
 export const NavigationButtonGroup = styled.div`
