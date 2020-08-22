@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Redirect, RouteComponentProps } from 'react-router-dom';
-import { useUserData } from '../UserContext';
+import { useUserData } from '../contexts/UserContext';
 import Alert from 'react-bootstrap/Alert';
 import Spinner from 'react-bootstrap/Spinner';
 import Form from 'react-bootstrap/Form';

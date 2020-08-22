@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect, Route, RouteProps } from 'react-router-dom';
-import { UserConsumer } from "../UserContext";
+import { UserConsumer } from "../contexts/UserContext";
 
 interface IProps extends RouteProps {
     component: any

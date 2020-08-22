@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faCalculator, faTags, faBars, faSignOutAlt, faBoxOpen, faPlusCircle, faStore } from '@fortawesome/free-solid-svg-icons';
-import { useUserData } from '../../UserContext';
+import { useUserData } from '../../contexts/UserContext';
 import SidebarLink from './SidebarLink';
 import * as styles from './styles/SidebarStyles';
 
@@ -19,7 +19,10 @@ const Sidebar = (props: SidebarProps) => {
         <styles.Sidebar sidebarShow={props.sidebarShow}>
           <styles.SidebarScroll>
               <div id={'business-title'}>
-                <styles.BusinessName><styles.SidebarToggleMobile><FontAwesomeIcon icon={faBars} onClick={() => props.toggleSidebar()} />&nbsp;&nbsp;</styles.SidebarToggleMobile>Business Name</styles.BusinessName>
+                <styles.BusinessName>
+                  <styles.SidebarToggleMobile><FontAwesomeIcon icon={faBars} onClick={() => props.toggleSidebar()} />&nbsp;&nbsp;</styles.SidebarToggleMobile>
+                  {userData.businessData?.name}
+                </styles.BusinessName>
               </div>
               <div id={'navigation'}>
                 <styles.NavigationSection>

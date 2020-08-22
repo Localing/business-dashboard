@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { UserProvider } from './UserContext';
+import { UserProvider } from './contexts/UserContext';
 import ProtectedRoute from './components/ProtectedRoute';
 
 // Pages
