@@ -9,6 +9,9 @@ import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import ResetPassword from './pages/ResetPassword';
 
+// Import global styles
+import { GlobalStyle } from './theme/GlobalStyle';
+
 // Initialize AWS Amplify
 import Amplify from 'aws-amplify';
 import awsconfig from './aws-exports';
@@ -18,6 +21,7 @@ function App() {
 
   return (
     <UserProvider>
+      <GlobalStyle />
       <Router>
         <Switch>
           <Route exact path="/" component={Home} />
