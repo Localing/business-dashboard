@@ -3,6 +3,7 @@ import * as styles from './styles/AddProductStyles';
 import * as dashboardStyles from './styles/DashboardStyles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowCircleRight, faArrowCircleLeft, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import Spinner from 'react-bootstrap/Spinner';
 import SubpageTracker from './sub-components/SubpageTracker';
 import ImageResize from './../image/ImageResize';
 import { getCroppedImg } from './../../services/canvasUtils';
@@ -45,6 +46,7 @@ const AddProduct = () => {
   const [showNextButton, setShowNextButton] = useState(true);
   const [showBackButton, setShowBackButton] = useState(false);
   const [showCompleteButton, setShowCompleteButton] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const fixDecimalPlaces = (val: string, setFunction: (new_val: string) => void) => {
     let num = parseFloat(val);
@@ -77,7 +79,9 @@ const AddProduct = () => {
         setErrorMessage('Please upload an image');
         return;
       }
+      setLoading(true);
       await createCroppedImage();
+      setLoading(false);
 
     } else if (activeStage === 3) {
       setShowNextButton(false);
@@ -141,6 +145,7 @@ const AddProduct = () => {
   }, [])
 
   const completeForm = async () => {
+    setLoading(true);
     if (!croppedImage) return;
     let blob = await fetch(croppedImage).then(r => r.blob());
     let base64Image = await readFile(blob);
@@ -167,6 +172,7 @@ const AddProduct = () => {
       setShowNextButton(true);
       setShowBackButton(false);
     } catch (err) {
+      setLoading(false);
       return;
     }
 
@@ -186,19 +192,24 @@ const AddProduct = () => {
     try {
       let response = await API.post(`/product/${userData.user?.attributes.sub}`,data);
 
-      // Clear all responses and reset to first stage
-      setProductName('');
-      setproductDescription('');
-      setProductPrice('0.00');
-      setProductDiscount('0.00');
-      setActiveStage(0);
-      setImageSrc(undefined);
-      
-      setShowCompleteButton(false);
-      setShowNextButton(true);
-      setShowBackButton(false);
+      resetFields();
     } catch (err) {
     }
+    setLoading(false);
+  }
+
+  const resetFields = () => {
+    // Clear all responses and reset to first stage
+    setProductName('');
+    setproductDescription('');
+    setProductPrice('0.00');
+    setProductDiscount('0.00');
+    setActiveStage(0);
+    setImageSrc(undefined);
+    
+    setShowCompleteButton(false);
+    setShowNextButton(true);
+    setShowBackButton(false);
   }
 
   
@@ -319,16 +330,18 @@ const AddProduct = () => {
           : null}
           <styles.NavigationButtonGroup>
             { (showNextButton) ? 
-            <styles.NextButton variant='outline-primary' onClick={() => nextStage()}>
-              Next&nbsp;&nbsp;
-              <FontAwesomeIcon icon={faArrowCircleRight} />
+            <styles.NextButton variant='outline-primary' disabled={loading ? true : false} onClick={() => nextStage()}>
+              {loading 
+              ? <><Spinner animation="border" size="sm" />&nbsp;&nbsp;Loading...</> 
+              : <>Next&nbsp;&nbsp;<FontAwesomeIcon icon={faArrowCircleRight} /></>}
             </styles.NextButton> : null }
-            { (showCompleteButton) ? <styles.CompleteButton onClick={() => completeForm()}>
-              Complete&nbsp;&nbsp;
-              <FontAwesomeIcon icon={faCheckCircle} />
+            { (showCompleteButton) ? <styles.CompleteButton disabled={loading ? true : false} onClick={() => completeForm()}>
+              {loading 
+              ? <><Spinner animation="border" size="sm" />&nbsp;&nbsp;Loading...</> 
+              : <>Complete&nbsp;&nbsp;<FontAwesomeIcon icon={faCheckCircle} /></>}
             </styles.CompleteButton> : null }
             { (showBackButton) ?
-            <styles.BackButton variant='outline-secondary' onClick={() => previousStage()}>
+            <styles.BackButton variant='outline-secondary' disabled={loading ? true : false} onClick={() => previousStage()}>
               <FontAwesomeIcon icon={faArrowCircleLeft} />
               &nbsp;&nbsp;Back
             </styles.BackButton>: null}
