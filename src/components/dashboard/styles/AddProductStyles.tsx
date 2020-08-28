@@ -75,18 +75,6 @@ export const ErrorMessage = styled.div`
   margin: 10px 0;
 `;
 
-export const ImageCropperWrapper = styled.div`
-  overflow: hidden;
-  width: 100%;
-  height: 500px;
-  display: flex;
-  position: relative;
-
-  @media (max-width: 720px) {
-    height: 80vw;
-  }
-`;
-
 export const NavigationButtonGroup = styled.div`
   margin-top: 10px;
   width: 100%;
