@@ -18,7 +18,7 @@ interface ProductSchema {
 
 interface ProductDataContext {
   productsData: ProductSchema[],
-  getProductsData: () => void,
+  getProductsData: (force?: boolean) => void,
   setProduct: (productId: string) => void,
   individualProductData: ProductSchema|undefined
 }
