@@ -3,9 +3,14 @@ import { Switch, Route, useLocation } from "react-router-dom";
 import { useUserData } from '../contexts/UserContext';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
+
+// Fixed components
 import NavigationBar from '../components/NavigationBar';
 import Sidebar from '../components/sidebar/Sidebar';
 import MobileTopBar from '../components/MobileTopBar';
+import LoadingSpinner from '../components/LoadingSpinner';
+
+// Route components
 import Orders from '../components/dashboard/Orders';
 import Home from '../components/dashboard/Home';
 import VerifyOrder from '../components/dashboard/VerifyOrder';
@@ -14,6 +19,8 @@ import Product from '../components/dashboard/Product';
 import Products from '../components/dashboard/Products';
 import AddProduct from '../components/dashboard/AddProduct';
 import BusinessInformation from '../components/dashboard/BusinessInformation';
+
+
 
 import * as styles from './styles/DashboardStyles';
 
@@ -57,12 +64,7 @@ const Dashboard:FunctionComponent<any> = () => {
             </styles.Main>
           </Row>
         </Container> :
-        <styles.LoadingWrapper>
-          <styles.LoadingText>Localing Business Dashboard</styles.LoadingText>
-          <styles.SpinnerWrapper>
-            <styles.LoadingSpinner animation="border" variant="primary" role="status"><span className="sr-only">Loading...</span></styles.LoadingSpinner>
-          </styles.SpinnerWrapper>
-        </styles.LoadingWrapper>
+        <styles.WholePageWrapper><LoadingSpinner text={'Localing Business Dashboard'} /></styles.WholePageWrapper>
       }
     </>
   )

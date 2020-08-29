@@ -18,7 +18,7 @@ interface ProductSchema {
 }
 
 interface ProductInformationProps {
-  data: ProductSchema
+  data: ProductSchema|undefined
 }
 const ProductInformation:FunctionComponent<ProductInformationProps> = ({ data, ...rest}) => {
   const formatPrice = (price: number):string => {

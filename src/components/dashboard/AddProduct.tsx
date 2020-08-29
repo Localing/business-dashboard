@@ -3,10 +3,11 @@ import * as styles from './styles/AddProductStyles';
 import * as dashboardStyles from './styles/DashboardStyles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowCircleRight, faArrowCircleLeft, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
-import Cropper from 'react-easy-crop';
+import Spinner from 'react-bootstrap/Spinner';
 import SubpageTracker from './sub-components/SubpageTracker';
-import API from './../../services/API';
+import ImageResize from './../image/ImageResize';
 import { getCroppedImg } from './../../services/canvasUtils';
+import API from './../../services/API';
 import { useUserData } from '../../contexts/UserContext';
 
 const AddProduct = () => {
@@ -45,6 +46,7 @@ const AddProduct = () => {
   const [showNextButton, setShowNextButton] = useState(true);
   const [showBackButton, setShowBackButton] = useState(false);
   const [showCompleteButton, setShowCompleteButton] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const fixDecimalPlaces = (val: string, setFunction: (new_val: string) => void) => {
     let num = parseFloat(val);
@@ -54,7 +56,6 @@ const AddProduct = () => {
     } else {
       setFunction(cleannum);
     }
-    console.log(val, setFunction,cleannum);
   }
 
   const nextStage = async () => {
@@ -78,7 +79,9 @@ const AddProduct = () => {
         setErrorMessage('Please upload an image');
         return;
       }
+      setLoading(true);
       await createCroppedImage();
+      setLoading(false);
 
     } else if (activeStage === 3) {
       setShowNextButton(false);
@@ -100,69 +103,25 @@ const AddProduct = () => {
     setActiveStage(activeStage - 1);
   }
 
-  const completeForm = async () => {
-    let data = {
-      "businessId": userData.user?.attributes.sub,
-      "price": (Math.round(parseFloat(productPrice) * 100)),
-      "discount": (parseFloat(productDiscount)),
-      "currency": "GBP",
-      "active": true,
-      "stock": (Math.round(parseFloat(stock))),
-      "name": productName,
-      "description": productDescription,
-      "images": [
-          "https://localingimagefrontenddevtemp.s3.eu-west-2.amazonaws.com/pizza.jpg"
-      ]
-    }
-    try {
-      let response = await API.post(`/product/${userData.user?.attributes.sub}`,data);
-      console.log(response);
-
-      // Clear all responses and reset to first stage
-      setProductName('');
-      setproductDescription('');
-      setProductPrice('0.00');
-      setProductDiscount('0.00');
-      setActiveStage(0);
-      setImageSrc(undefined);
-      setCrop({ x: 0, y: 0 });
-      setZoom(1);
-      setCroppedImage(undefined);
-      setCroppedAreaPixels(null);
-      setShowCompleteButton(false);
-      setShowNextButton(true);
-      setShowBackButton(false);
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
-  // Image cropper
-  const [crop, setCrop] = useState({ x: 0, y: 0 });
-  const [zoom, setZoom] = useState(1);
-  const [croppedImage, setCroppedImage] = useState<string|undefined>(undefined);
+  // Image
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<any>(null);
-
-  const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
-    setCroppedAreaPixels(croppedAreaPixels)
-  }, [])
-  
-  const readFile = (file: any): Promise<string> => {
-    return new Promise(resolve => {
-      const reader: any = new FileReader()
-      reader.addEventListener('load', () => resolve(reader.result), false)
-      reader.readAsDataURL(file)
-    })
-  }
+  const [croppedImage, setCroppedImage] = useState<string|undefined>(undefined);
 
   const onFileChange = async (e: any) => {
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
       let imageDataUrl: string = await readFile(file);
-      console.log(imageDataUrl);
 
       setImageSrc(imageDataUrl);
     }
+  }
+
+  const readFile = (file: any): Promise<string> => {
+    return new Promise(resolve => {
+      const reader: any = new FileReader();
+      reader.addEventListener('load', () => resolve(reader.result), false);
+      reader.readAsDataURL(file);
+    })
   }
 
   const createCroppedImage = useCallback(async () => {
@@ -180,6 +139,80 @@ const AddProduct = () => {
       console.error(e)
     }
   }, [imageSrc, croppedAreaPixels]);
+
+  const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
+    setCroppedAreaPixels(croppedAreaPixels);
+  }, [])
+
+  const completeForm = async () => {
+    setLoading(true);
+    if (!croppedImage) return;
+    let blob = await fetch(croppedImage).then(r => r.blob());
+    let base64Image = await readFile(blob);
+    let data_image = {
+      imageData: base64Image,
+      businessId: userData.user?.attributes.sub,
+    }
+
+    let url;
+
+    try {
+      let response = await API.post(`/image`,data_image);
+      url = response.data.location;
+
+      // Clear all responses and reset to first stage
+      setProductName('');
+      setproductDescription('');
+      setProductPrice('0.00');
+      setProductDiscount('0.00');
+      setActiveStage(0);
+      setImageSrc(undefined);
+      
+      setShowCompleteButton(false);
+      setShowNextButton(true);
+      setShowBackButton(false);
+    } catch (err) {
+      setLoading(false);
+      return;
+    }
+
+    let data = {
+      businessId: userData.user?.attributes.sub,
+      price: (Math.round(parseFloat(productPrice) * 100)),
+      discount: (parseFloat(productDiscount)),
+      currency: "GBP",
+      active: true,
+      stock: (Math.round(parseFloat(stock))),
+      name: productName,
+      description: productDescription,
+      images: [
+          url
+      ]
+    }
+    try {
+      let response = await API.post(`/product/${userData.user?.attributes.sub}`,data);
+
+      resetFields();
+    } catch (err) {
+    }
+    setLoading(false);
+  }
+
+  const resetFields = () => {
+    // Clear all responses and reset to first stage
+    setProductName('');
+    setproductDescription('');
+    setProductPrice('0.00');
+    setProductDiscount('0.00');
+    setActiveStage(0);
+    setImageSrc(undefined);
+    
+    setShowCompleteButton(false);
+    setShowNextButton(true);
+    setShowBackButton(false);
+  }
+
+  
 
   return (
     <dashboardStyles.DashboardContainer fluid>
@@ -231,22 +264,16 @@ const AddProduct = () => {
           {
             (activeStage === 2) ? 
               (imageSrc) ?
-              <styles.ImageCropperWrapper>
-                <Cropper
-                  image={imageSrc}
-                  crop={crop}
-                  zoom={zoom}
-                  aspect={1 / 1}
-                  onCropChange={setCrop}
-                  onCropComplete={onCropComplete}
-                  onZoomChange={setZoom}
-                />
-              </styles.ImageCropperWrapper>
+              <ImageResize 
+                onCropComplete={onCropComplete}
+                croppedAreaPixels={croppedAreaPixels}
+                imageSrc={imageSrc}
+              />
               : <styles.FormBox>
                 <styles.InputLabel>Choose image</styles.InputLabel>
                 <styles.InputFile
                   type="file"
-                  accept="image/png, image/jpeg"
+                  accept="image/*"
                   onChange={onFileChange}
                 />
               </styles.FormBox>
@@ -303,16 +330,18 @@ const AddProduct = () => {
           : null}
           <styles.NavigationButtonGroup>
             { (showNextButton) ? 
-            <styles.NextButton variant='outline-primary' onClick={() => nextStage()}>
-              Next&nbsp;&nbsp;
-              <FontAwesomeIcon icon={faArrowCircleRight} />
+            <styles.NextButton variant='outline-primary' disabled={loading ? true : false} onClick={() => nextStage()}>
+              {loading 
+              ? <><Spinner animation="border" size="sm" />&nbsp;&nbsp;Loading...</> 
+              : <>Next&nbsp;&nbsp;<FontAwesomeIcon icon={faArrowCircleRight} /></>}
             </styles.NextButton> : null }
-            { (showCompleteButton) ? <styles.CompleteButton onClick={() => completeForm()}>
-              Complete&nbsp;&nbsp;
-              <FontAwesomeIcon icon={faCheckCircle} />
+            { (showCompleteButton) ? <styles.CompleteButton disabled={loading ? true : false} onClick={() => completeForm()}>
+              {loading 
+              ? <><Spinner animation="border" size="sm" />&nbsp;&nbsp;Loading...</> 
+              : <>Complete&nbsp;&nbsp;<FontAwesomeIcon icon={faCheckCircle} /></>}
             </styles.CompleteButton> : null }
             { (showBackButton) ?
-            <styles.BackButton variant='outline-secondary' onClick={() => previousStage()}>
+            <styles.BackButton variant='outline-secondary' disabled={loading ? true : false} onClick={() => previousStage()}>
               <FontAwesomeIcon icon={faArrowCircleLeft} />
               &nbsp;&nbsp;Back
             </styles.BackButton>: null}

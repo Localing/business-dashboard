@@ -5,6 +5,7 @@ import API from './../../services/API';
 
 import ProductListTable from './sub-components/ProductListTable';
 import { useUserData } from '../../contexts/UserContext';
+import LoadingSpinner from '../LoadingSpinner';
 
 interface ProductSchema {
   businessId: string,
@@ -40,7 +41,7 @@ const Products = () => {
     <dashboardStyles.DashboardContainer fluid>
     <dashboardStyles.SectionTitle>Products</dashboardStyles.SectionTitle>
     <dashboardStyles.ContentBlockWrapper>
-      <ProductListTable data={data}></ProductListTable>
+      {(data.length > 0) ? <ProductListTable data={data} /> : <LoadingSpinner />}
     </dashboardStyles.ContentBlockWrapper>
   </dashboardStyles.DashboardContainer>
   )
