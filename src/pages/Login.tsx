@@ -5,6 +5,7 @@ import Alert from 'react-bootstrap/Alert';
 import Spinner from 'react-bootstrap/Spinner';
 import Form from 'react-bootstrap/Form';
 import LocalingLogo from './../assets/localingLogo.png';
+import PageTitle from './../components/PageTitle';
 
 import * as styles from './styles/LoginStyles';
 
@@ -39,7 +40,9 @@ const Login = (props: RouteComponentProps) => {
     }
 
     return (
-        userData.authenticated ?
+      <>
+        <PageTitle title="Login" />
+        {userData.authenticated ?
             <Redirect to={from} />
             :
             <>
@@ -89,7 +92,8 @@ const Login = (props: RouteComponentProps) => {
                         </Form>
                     </styles.LoginBox>
                 </styles.LoginBoxWrapper>
-            </>
+            </>}
+          </>
     )
 }
 

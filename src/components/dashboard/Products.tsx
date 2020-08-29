@@ -5,6 +5,7 @@ import * as dashboardStyles from './styles/DashboardStyles';
 import ProductListTable from './sub-components/ProductListTable';
 import LoadingSpinner from '../LoadingSpinner';
 import { useProductData } from '../../contexts/ProductDataContext';
+import PageTitle from './../PageTitle';
 
 interface ProductSchema {
   businessId: string,
@@ -33,12 +34,15 @@ const Products = () => {
   }, [productData.productsData]);
 
   return (
-    <dashboardStyles.DashboardContainer fluid>
-    <dashboardStyles.SectionTitle>Products</dashboardStyles.SectionTitle>
-    <dashboardStyles.ContentBlockWrapper>
-      {(data.length > 0) ? <ProductListTable data={data} /> : <LoadingSpinner />}
-    </dashboardStyles.ContentBlockWrapper>
-  </dashboardStyles.DashboardContainer>
+    <>
+      <PageTitle title="Products" />
+      <dashboardStyles.DashboardContainer fluid>
+        <dashboardStyles.SectionTitle>Products</dashboardStyles.SectionTitle>
+        <dashboardStyles.ContentBlockWrapper>
+          {(data.length > 0) ? <ProductListTable data={data} /> : <LoadingSpinner />}
+        </dashboardStyles.ContentBlockWrapper>
+      </dashboardStyles.DashboardContainer>
+    </>
   )
 }
 

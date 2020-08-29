@@ -15,6 +15,7 @@ import Spinner from 'react-bootstrap/Spinner';
 // Components
 import SubpageTracker from './sub-components/SubpageTracker';
 import ImageResize from './../image/ImageResize';
+import PageTitle from './../PageTitle';
 
 // Services
 import { getCroppedImg } from './../../services/canvasUtils';
@@ -217,141 +218,144 @@ const AddProduct = () => {
   
 
   return (
-    <dashboardStyles.DashboardContainer fluid>
-    <dashboardStyles.SectionTitle>Add Product</dashboardStyles.SectionTitle>
-    <dashboardStyles.ContentBlockWrapper>
-      <SubpageTracker stages={stages} activeStage={activeStage}></SubpageTracker>
-      <dashboardStyles.InformationWrapper direction={'row'}>
-        <dashboardStyles.InformationSubBox>
-          {
-            (activeStage === 0) ? <styles.FormBox>
-              <styles.SingleInput>
-                <styles.InputLabel>Product Name</styles.InputLabel>
-                <styles.InputInput value={productName} onChange={e => {setProductName(e.target.value)}} />
-              </styles.SingleInput>
-              <styles.SingleInput>
-                <styles.InputLabel>Product Description</styles.InputLabel>
-                <styles.InputTextarea value={productDescription} onChange={e => {setproductDescription(e.target.value)}} />
-              </styles.SingleInput>
-            </styles.FormBox>
-             : null
-          }
-
-          {
-            (activeStage === 1) ? <styles.FormBox>
-              <styles.SingleInput>
-                <styles.InputLabel>Pre-Sale Price (GBP)</styles.InputLabel>
-                <styles.InputInput 
-                  type="number"
-                  step="0.01"
-                  value={productPrice}
-                  onChange={e => setProductPrice(e.target.value)}
-                  onBlur={() => fixDecimalPlaces(productPrice, setProductPrice)}
-                />
-              </styles.SingleInput>
-              <styles.SingleInput>
-                <styles.InputLabel>Discount (%)</styles.InputLabel>
-                <styles.InputInput
-                type="number"
-                value={productDiscount}
-                onChange={e => setProductDiscount(e.target.value)}
-              />
-              </styles.SingleInput>
-              <styles.FieldName>Customer Pays:</styles.FieldName>
-              <styles.FieldValue>£{(parseFloat(productPrice)*(1 - parseFloat(productDiscount)/100)).toFixed(2)}</styles.FieldValue>
-            </styles.FormBox>
-             : null
-          }
-
-          {
-            (activeStage === 2) ? 
-              (imageSrc) ?
-              <ImageResize 
-                onCropComplete={onCropComplete}
-                croppedAreaPixels={croppedAreaPixels}
-                imageSrc={imageSrc}
-              />
-              : <styles.FormBox>
-                <styles.InputLabel>Choose image</styles.InputLabel>
-                <styles.InputFile
-                  type="file"
-                  accept="image/*"
-                  onChange={onFileChange}
-                />
+    <>
+      <PageTitle title={'Add Product'} />
+      <dashboardStyles.DashboardContainer fluid>
+        <dashboardStyles.SectionTitle>Add Product</dashboardStyles.SectionTitle>
+        <dashboardStyles.ContentBlockWrapper>
+        <SubpageTracker stages={stages} activeStage={activeStage}></SubpageTracker>
+        <dashboardStyles.InformationWrapper direction={'row'}>
+          <dashboardStyles.InformationSubBox>
+            {
+              (activeStage === 0) ? <styles.FormBox>
+                <styles.SingleInput>
+                  <styles.InputLabel>Product Name</styles.InputLabel>
+                  <styles.InputInput value={productName} onChange={e => {setProductName(e.target.value)}} />
+                </styles.SingleInput>
+                <styles.SingleInput>
+                  <styles.InputLabel>Product Description</styles.InputLabel>
+                  <styles.InputTextarea value={productDescription} onChange={e => {setproductDescription(e.target.value)}} />
+                </styles.SingleInput>
               </styles.FormBox>
-             : null
-          }
+              : null
+            }
 
-          {
-            (activeStage === 3) ? <styles.FormBox>
-              <styles.SingleInput>
-                <styles.InputLabel>Max purchase quantity (number able to be added to cart)</styles.InputLabel>
-                <styles.InputLabelSubtitle>(0 sets as out of stock)</styles.InputLabelSubtitle>
-                <styles.InputInput type="number" value={stock} onChange={e => {setStock(e.target.value)}} />
-              </styles.SingleInput>
-            </styles.FormBox>
-             : null
-          }
+            {
+              (activeStage === 1) ? <styles.FormBox>
+                <styles.SingleInput>
+                  <styles.InputLabel>Pre-Sale Price (GBP)</styles.InputLabel>
+                  <styles.InputInput 
+                    type="number"
+                    step="0.01"
+                    value={productPrice}
+                    onChange={e => setProductPrice(e.target.value)}
+                    onBlur={() => fixDecimalPlaces(productPrice, setProductPrice)}
+                  />
+                </styles.SingleInput>
+                <styles.SingleInput>
+                  <styles.InputLabel>Discount (%)</styles.InputLabel>
+                  <styles.InputInput
+                  type="number"
+                  value={productDiscount}
+                  onChange={e => setProductDiscount(e.target.value)}
+                />
+                </styles.SingleInput>
+                <styles.FieldName>Customer Pays:</styles.FieldName>
+                <styles.FieldValue>£{(parseFloat(productPrice)*(1 - parseFloat(productDiscount)/100)).toFixed(2)}</styles.FieldValue>
+              </styles.FormBox>
+              : null
+            }
 
-          {
-            (activeStage === 4) ? 
-              <>
-                <styles.ConfirmationText>Confirm Details</styles.ConfirmationText>
-                <styles.ConfirmationField>
-                  <styles.FieldName>Name</styles.FieldName>
-                  <styles.FieldValue>{productName}</styles.FieldValue>
-                </styles.ConfirmationField>
-                <styles.ConfirmationField>
-                  <styles.FieldName>Description</styles.FieldName>
-                  <styles.FieldValue>{productDescription}</styles.FieldValue>
-                </styles.ConfirmationField>
-                <styles.ConfirmationField>
-                  <styles.FieldName>Price</styles.FieldName>
-                  <styles.FieldValue>£{parseFloat(productPrice).toFixed(2)}</styles.FieldValue>
-                </styles.ConfirmationField>
-                <styles.ConfirmationField>
-                  <styles.FieldName>Discount</styles.FieldName>
-                  <styles.FieldValue>{parseFloat(productDiscount)}%</styles.FieldValue>
-                </styles.ConfirmationField>
-                <styles.ConfirmationField>
-                  <styles.FieldName>Max purchase quantity</styles.FieldName>
-                  <styles.FieldValue>{stock}</styles.FieldValue>
-                </styles.ConfirmationField>
-                {(croppedImage) ?
+            {
+              (activeStage === 2) ? 
+                (imageSrc) ?
+                <ImageResize 
+                  onCropComplete={onCropComplete}
+                  croppedAreaPixels={croppedAreaPixels}
+                  imageSrc={imageSrc}
+                />
+                : <styles.FormBox>
+                  <styles.InputLabel>Choose image</styles.InputLabel>
+                  <styles.InputFile
+                    type="file"
+                    accept="image/*"
+                    onChange={onFileChange}
+                  />
+                </styles.FormBox>
+              : null
+            }
+
+            {
+              (activeStage === 3) ? <styles.FormBox>
+                <styles.SingleInput>
+                  <styles.InputLabel>Max purchase quantity (number able to be added to cart)</styles.InputLabel>
+                  <styles.InputLabelSubtitle>(0 sets as out of stock)</styles.InputLabelSubtitle>
+                  <styles.InputInput type="number" value={stock} onChange={e => {setStock(e.target.value)}} />
+                </styles.SingleInput>
+              </styles.FormBox>
+              : null
+            }
+
+            {
+              (activeStage === 4) ? 
+                <>
+                  <styles.ConfirmationText>Confirm Details</styles.ConfirmationText>
                   <styles.ConfirmationField>
-                    <styles.FieldName>Image</styles.FieldName>
-                    <styles.FieldValue><styles.FieldImage src={croppedImage} /></styles.FieldValue>
-                  </styles.ConfirmationField> : null
-                }
-              </>
-             : null
-          }
+                    <styles.FieldName>Name</styles.FieldName>
+                    <styles.FieldValue>{productName}</styles.FieldValue>
+                  </styles.ConfirmationField>
+                  <styles.ConfirmationField>
+                    <styles.FieldName>Description</styles.FieldName>
+                    <styles.FieldValue>{productDescription}</styles.FieldValue>
+                  </styles.ConfirmationField>
+                  <styles.ConfirmationField>
+                    <styles.FieldName>Price</styles.FieldName>
+                    <styles.FieldValue>£{parseFloat(productPrice).toFixed(2)}</styles.FieldValue>
+                  </styles.ConfirmationField>
+                  <styles.ConfirmationField>
+                    <styles.FieldName>Discount</styles.FieldName>
+                    <styles.FieldValue>{parseFloat(productDiscount)}%</styles.FieldValue>
+                  </styles.ConfirmationField>
+                  <styles.ConfirmationField>
+                    <styles.FieldName>Max purchase quantity</styles.FieldName>
+                    <styles.FieldValue>{stock}</styles.FieldValue>
+                  </styles.ConfirmationField>
+                  {(croppedImage) ?
+                    <styles.ConfirmationField>
+                      <styles.FieldName>Image</styles.FieldName>
+                      <styles.FieldValue><styles.FieldImage src={croppedImage} /></styles.FieldValue>
+                    </styles.ConfirmationField> : null
+                  }
+                </>
+              : null
+            }
 
-          {(errorMessage !== '') ? 
-          <styles.ErrorMessage>{errorMessage}</styles.ErrorMessage>
-          : null}
-          <styles.NavigationButtonGroup>
-            { (showNextButton) ? 
-            <styles.NextButton variant='outline-primary' disabled={loading ? true : false} onClick={() => nextStage()}>
-              {loading 
-              ? <><Spinner animation="border" size="sm" />&nbsp;&nbsp;Loading...</> 
-              : <>Next&nbsp;&nbsp;<FontAwesomeIcon icon={faArrowCircleRight} /></>}
-            </styles.NextButton> : null }
-            { (showCompleteButton) ? <styles.CompleteButton disabled={loading ? true : false} onClick={() => completeForm()}>
-              {loading 
-              ? <><Spinner animation="border" size="sm" />&nbsp;&nbsp;Loading...</> 
-              : <>Complete&nbsp;&nbsp;<FontAwesomeIcon icon={faCheckCircle} /></>}
-            </styles.CompleteButton> : null }
-            { (showBackButton) ?
-            <styles.BackButton variant='outline-secondary' disabled={loading ? true : false} onClick={() => previousStage()}>
-              <FontAwesomeIcon icon={faArrowCircleLeft} />
-              &nbsp;&nbsp;Back
-            </styles.BackButton>: null}
-          </styles.NavigationButtonGroup>
-        </dashboardStyles.InformationSubBox>
-      </dashboardStyles.InformationWrapper>
-    </dashboardStyles.ContentBlockWrapper>
-  </dashboardStyles.DashboardContainer>
+            {(errorMessage !== '') ? 
+            <styles.ErrorMessage>{errorMessage}</styles.ErrorMessage>
+            : null}
+            <styles.NavigationButtonGroup>
+              { (showNextButton) ? 
+              <styles.NextButton variant='outline-primary' disabled={loading ? true : false} onClick={() => nextStage()}>
+                {loading 
+                ? <><Spinner animation="border" size="sm" />&nbsp;&nbsp;Loading...</> 
+                : <>Next&nbsp;&nbsp;<FontAwesomeIcon icon={faArrowCircleRight} /></>}
+              </styles.NextButton> : null }
+              { (showCompleteButton) ? <styles.CompleteButton disabled={loading ? true : false} onClick={() => completeForm()}>
+                {loading 
+                ? <><Spinner animation="border" size="sm" />&nbsp;&nbsp;Loading...</> 
+                : <>Complete&nbsp;&nbsp;<FontAwesomeIcon icon={faCheckCircle} /></>}
+              </styles.CompleteButton> : null }
+              { (showBackButton) ?
+              <styles.BackButton variant='outline-secondary' disabled={loading ? true : false} onClick={() => previousStage()}>
+                <FontAwesomeIcon icon={faArrowCircleLeft} />
+                &nbsp;&nbsp;Back
+              </styles.BackButton>: null}
+            </styles.NavigationButtonGroup>
+          </dashboardStyles.InformationSubBox>
+        </dashboardStyles.InformationWrapper>
+      </dashboardStyles.ContentBlockWrapper>
+    </dashboardStyles.DashboardContainer>
+  </>
   )
 }
 

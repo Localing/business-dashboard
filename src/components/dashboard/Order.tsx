@@ -3,6 +3,7 @@ import {useLocation} from 'react-router-dom';
 import * as styles from './styles/OrderStyles';
 import * as dashboardStyles from './styles/DashboardStyles';
 import OrderInformation from './sub-components/OrderInformation';
+import PageTitle from './../PageTitle';
 
 interface OrderProps {
   
@@ -56,14 +57,17 @@ const Order:FunctionComponent<OrderProps> = () => {
   }, []);
 
   return (
-    <dashboardStyles.DashboardContainer fluid>
-      <dashboardStyles.SectionTitle>Order <dashboardStyles.SectionTitleSmall>({orderData?.customerName} - {formatDate(orderData?.orderDate)})</dashboardStyles.SectionTitleSmall></dashboardStyles.SectionTitle>
-      <dashboardStyles.ContentBlockWrapper>
-        <dashboardStyles.InformationWrapper direction={'row'}>
-          <OrderInformation data={orderData}></OrderInformation> 
-        </dashboardStyles.InformationWrapper>
-      </dashboardStyles.ContentBlockWrapper>
-    </dashboardStyles.DashboardContainer>
+    <>
+    <PageTitle title="Order" />
+      <dashboardStyles.DashboardContainer fluid>
+        <dashboardStyles.SectionTitle>Order <dashboardStyles.SectionTitleSmall>({orderData?.customerName} - {formatDate(orderData?.orderDate)})</dashboardStyles.SectionTitleSmall></dashboardStyles.SectionTitle>
+        <dashboardStyles.ContentBlockWrapper>
+          <dashboardStyles.InformationWrapper direction={'row'}>
+            <OrderInformation data={orderData}></OrderInformation> 
+          </dashboardStyles.InformationWrapper>
+        </dashboardStyles.ContentBlockWrapper>
+      </dashboardStyles.DashboardContainer>
+    </>
   )
 }
 

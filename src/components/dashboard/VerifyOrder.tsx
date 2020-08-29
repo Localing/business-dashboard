@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faKeyboard, faCheck } from '@fortawesome/free-solid-svg-icons';
 import OTPInput from './sub-components/OTP';
 import OrderInformation from './sub-components/OrderInformation';
+import PageTitle from './../PageTitle';
 
 import * as styles from './styles/VerifyOrderStyles';
 import * as dashboardStyles from './styles/DashboardStyles';
@@ -94,6 +95,8 @@ const VerifyOrder:FunctionComponent<VerifyOrderProps> = () => {
   }, [displayVerfied]);
 
   return (
+    <>
+      <PageTitle title="Verify Order" />
       <dashboardStyles.DashboardContainer fluid>
         <dashboardStyles.SectionTitle>Verify Order</dashboardStyles.SectionTitle>
         <dashboardStyles.ContentBlockWrapper>
@@ -126,6 +129,7 @@ const VerifyOrder:FunctionComponent<VerifyOrderProps> = () => {
               </> : null}
         </dashboardStyles.ContentBlockWrapper>
       </dashboardStyles.DashboardContainer>
+    </>
   )
 }
 

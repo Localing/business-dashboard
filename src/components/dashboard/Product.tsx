@@ -8,6 +8,7 @@ import * as dashboardStyles from './styles/DashboardStyles';
 
 import ProductInformation from './sub-components/ProductInformation';
 import LoadingSpinner from '../LoadingSpinner';
+import PageTitle from './../PageTitle';
 
 interface ProductSchema {
   businessId: string,
@@ -43,14 +44,17 @@ const Product = () => {
   }, [productData.individualProductData]);
 
   return (
-    <dashboardStyles.DashboardContainer fluid>
-    <dashboardStyles.SectionTitle>Product <dashboardStyles.SectionTitleSmall>Product Name</dashboardStyles.SectionTitleSmall></dashboardStyles.SectionTitle>
-    <dashboardStyles.ContentBlockWrapper>
-      <dashboardStyles.InformationWrapper direction={'row'}>
-        {data ? <ProductInformation data={data} /> : <LoadingSpinner />}
-      </dashboardStyles.InformationWrapper>
-    </dashboardStyles.ContentBlockWrapper>
-  </dashboardStyles.DashboardContainer>
+    <>
+      <PageTitle title={data?.name || "" } />
+      <dashboardStyles.DashboardContainer fluid>
+      <dashboardStyles.SectionTitle>Product <dashboardStyles.SectionTitleSmall>Product Name</dashboardStyles.SectionTitleSmall></dashboardStyles.SectionTitle>
+      <dashboardStyles.ContentBlockWrapper>
+        <dashboardStyles.InformationWrapper direction={'row'}>
+          {data ? <ProductInformation data={data} /> : <LoadingSpinner />}
+        </dashboardStyles.InformationWrapper>
+      </dashboardStyles.ContentBlockWrapper>
+    </dashboardStyles.DashboardContainer>
+    </>
   )
 }
 
