@@ -1,17 +1,29 @@
 import React, { FunctionComponent, useState, useCallback } from 'react';
+
+// Contexts
+import { useHistory } from 'react-router-dom';
+import { useUserData } from '../../contexts/UserContext';
+import { useProductData } from '../../contexts/ProductDataContext';
+
+// Styles
 import * as styles from './styles/AddProductStyles';
 import * as dashboardStyles from './styles/DashboardStyles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowCircleRight, faArrowCircleLeft, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import Spinner from 'react-bootstrap/Spinner';
+
+// Components
 import SubpageTracker from './sub-components/SubpageTracker';
 import ImageResize from './../image/ImageResize';
+
+// Services
 import { getCroppedImg } from './../../services/canvasUtils';
 import API from './../../services/API';
-import { useUserData } from '../../contexts/UserContext';
 
 const AddProduct = () => {
   const userData = useUserData();
+  const history = useHistory();
+  const productData = useProductData();
 
   // Page staging
   const [activeStage, setActiveStage] = useState(0);
@@ -160,17 +172,6 @@ const AddProduct = () => {
       let response = await API.post(`/image`,data_image);
       url = response.data.location;
 
-      // Clear all responses and reset to first stage
-      setProductName('');
-      setproductDescription('');
-      setProductPrice('0.00');
-      setProductDiscount('0.00');
-      setActiveStage(0);
-      setImageSrc(undefined);
-      
-      setShowCompleteButton(false);
-      setShowNextButton(true);
-      setShowBackButton(false);
     } catch (err) {
       setLoading(false);
       return;
@@ -191,8 +192,9 @@ const AddProduct = () => {
     }
     try {
       let response = await API.post(`/product/${userData.user?.attributes.sub}`,data);
-
-      resetFields();
+      // Update product list with new product
+      await productData.getProductsData(true);
+      history.push('/dashboard/products')
     } catch (err) {
     }
     setLoading(false);

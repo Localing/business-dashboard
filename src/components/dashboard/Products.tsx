@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import * as styles from './styles/ProductsStyles';
 import * as dashboardStyles from './styles/DashboardStyles';
-import API from './../../services/API';
 
 import ProductListTable from './sub-components/ProductListTable';
-import { useUserData } from '../../contexts/UserContext';
 import LoadingSpinner from '../LoadingSpinner';
+import { useProductData } from '../../contexts/ProductDataContext';
 
 interface ProductSchema {
   businessId: string,
@@ -21,21 +20,17 @@ interface ProductSchema {
 }
 
 const Products = () => {
-  const userData = useUserData();
+  const productData = useProductData();
   const [data, setData] = useState<ProductSchema[]>([])
 
-  const getData = async () => {
-    try {
-      let response = await API.get(`/product/${userData.user?.attributes.sub}`);
-      setData(response.data);
-    } catch (err) {
-      console.log(err);
-    }
-  }
+  useEffect(() => {
+    productData.getProductsData();
+  }, []);
 
   useEffect(() => {
-    getData();
-  }, []);
+    console.log(productData.productsData);
+    setData(productData.productsData);
+  }, [productData.productsData]);
 
   return (
     <dashboardStyles.DashboardContainer fluid>
