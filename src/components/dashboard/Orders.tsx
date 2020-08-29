@@ -3,6 +3,7 @@ import * as styles from './styles/ActiveOrdersStyles';
 import * as dashboardStyles from './styles/DashboardStyles';
 
 import OrderListTable from './sub-components/OrderListTable';
+import PageTitle from './../PageTitle';
 
 import API from '../../services/API';
 
@@ -88,12 +89,15 @@ const Orders = () => {
   }, []);
 
   return (
-    <dashboardStyles.DashboardContainer fluid>
-      <dashboardStyles.SectionTitle>Orders</dashboardStyles.SectionTitle>
-      <dashboardStyles.ContentBlockWrapper>
-        <OrderListTable data={data}></OrderListTable>
-      </dashboardStyles.ContentBlockWrapper>
-    </dashboardStyles.DashboardContainer>
+    <>
+      <PageTitle title="Orders" />
+      <dashboardStyles.DashboardContainer fluid>
+        <dashboardStyles.SectionTitle>Orders</dashboardStyles.SectionTitle>
+        <dashboardStyles.ContentBlockWrapper>
+          <OrderListTable data={data}></OrderListTable>
+        </dashboardStyles.ContentBlockWrapper>
+      </dashboardStyles.DashboardContainer>
+    </>
   )
 }
 

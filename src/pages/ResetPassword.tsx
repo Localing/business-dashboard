@@ -3,6 +3,7 @@ import Alert from "react-bootstrap/Alert";
 import Spinner from "react-bootstrap/Spinner";
 import Form from "react-bootstrap/Form";
 import { Auth } from "aws-amplify";
+import PageTitle from 'react-helmet';
 
 import * as styles from './styles/LoginStyles';
 
@@ -66,6 +67,7 @@ const ResetPassword = () => {
     }
     return (
             <>
+            <PageTitle title="Reset Password" />
             <styles.BackgroundImage></styles.BackgroundImage>
             <styles.LoginBoxWrapper><styles.LoginBox>
                 {codeSent ?
