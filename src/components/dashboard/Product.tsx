@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+
 import { useLocation } from 'react-router-dom';
+import { useProductData } from '../../contexts/ProductDataContext';
+
 import * as styles from './styles/ProductStyles';
 import * as dashboardStyles from './styles/DashboardStyles';
+
 import ProductInformation from './sub-components/ProductInformation';
-import API from './../../services/API';
-import { useUserData } from '../../contexts/UserContext';
 import LoadingSpinner from '../LoadingSpinner';
 
 interface ProductSchema {
@@ -26,25 +28,19 @@ interface ProductProps {
 
 const Product = () => {
   const location = useLocation();
-  const userData = useUserData();
+  const productData = useProductData();
 
   const [data, setData] = useState<ProductSchema|undefined>(undefined);
 
-  const getData = async () => {
-    let businessId = userData.businessData?.businessId;
+  useEffect(() => {
     let productId = location.pathname.split('/')[3];
 
-    try {
-      let response = await API.get(`/product/${businessId}/${productId}`);
-      setData(response.data);
-    } catch (err) {
-      
-    }    
-  }
+    productData.setProduct(productId);
+  }, []);
 
   useEffect(() => {
-    getData();
-  }, []);
+    setData(productData.individualProductData);
+  }, [productData.individualProductData]);
 
   return (
     <dashboardStyles.DashboardContainer fluid>
