@@ -55,7 +55,6 @@ export const Separator = styled.p`
   color: #aaaaaa;
 `;
 
-<<<<<<< HEAD
 export const GroupSeparator = styled.p`
   display: inline-block;
   line-height: 2em;
@@ -88,8 +87,4 @@ export const SectionWrapper = styled.div`
     display: flex;
     align-items: center;
   }
-=======
-export const OTPWrapper = styled.div`
-  display: flex;
->>>>>>> origin/master
 `;

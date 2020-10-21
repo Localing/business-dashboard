@@ -45,7 +45,6 @@ const VerifyOrder:FunctionComponent<VerifyOrderProps> = () => {
       "orderID": "786828b0-d8e0-11ea-87d0-0242ac130003",
       "orderDate": "1596826981",
       "redeemed": false,
-<<<<<<< HEAD
       "items": [{"name": "Pizza; toppings: olives, anchovies, red onions, mozzarella, chives", "quantity": 1, price: 2.0, "imgUrl": "https://localingimagefrontenddevtemp.s3.eu-west-2.amazonaws.com/pizza.jpg"},
       {"name": "Pizza; toppings: olives, anchovies, red onions, mozzarella, chives", "quantity": 1, price: 2.0, "imgUrl": "https://localingimagefrontenddevtemp.s3.eu-west-2.amazonaws.com/pizza.jpg"},
       {"name": "Pizza; toppings: olives, anchovies, red onions, mozzarella, chives", "quantity": 1, price: 2.0, "imgUrl": "https://localingimagefrontenddevtemp.s3.eu-west-2.amazonaws.com/pizza.jpg"},
@@ -56,10 +55,6 @@ const VerifyOrder:FunctionComponent<VerifyOrderProps> = () => {
       {"name": "Pizza; toppings: olives, anchovies, red onions, mozzarella, chives", "quantity": 1, price: 2.0, "imgUrl": "https://localingimagefrontenddevtemp.s3.eu-west-2.amazonaws.com/pizza.jpg"},
       {"name": "Pizza; toppings: olives, anchovies, red onions, mozzarella, chives", "quantity": 1, price: 2.0, "imgUrl": "https://localingimagefrontenddevtemp.s3.eu-west-2.amazonaws.com/pizza.jpg"},
       {"name": "Caramel vanilla shortcake with pumpkin spiced latte", "quantity": 2, price: 1.0, "imgUrl": "https://localingimagefrontenddevtemp.s3.eu-west-2.amazonaws.com/cake.jpg"}]
-=======
-      "items": [{"name": "Pizza", "quantity": 1, price: 2.0, "imgUrl": "https://localingimagefrontenddevtemp.s3.eu-west-2.amazonaws.com/pizza.jpg"}, 
-      {"name": "Coffee and Cake", "quantity": 2, price: 1.0, "imgUrl": "https://localingimagefrontenddevtemp.s3.eu-west-2.amazonaws.com/cake.jpg"}]
->>>>>>> origin/master
     }
   }
 
@@ -81,7 +76,6 @@ const VerifyOrder:FunctionComponent<VerifyOrderProps> = () => {
     console.log(orderData);
   }, [orderData]);
 
-<<<<<<< HEAD
   useEffect(() => {
     // Reset component and clear data after two seconds once verified
 
@@ -103,9 +97,6 @@ const VerifyOrder:FunctionComponent<VerifyOrderProps> = () => {
   return (
     <>
       <PageTitle title="Verify Order" />
-=======
-  return (
->>>>>>> origin/master
       <dashboardStyles.DashboardContainer fluid>
         <dashboardStyles.SectionTitle>Verify Order</dashboardStyles.SectionTitle>
         <dashboardStyles.ContentBlockWrapper>
@@ -126,15 +117,9 @@ const VerifyOrder:FunctionComponent<VerifyOrderProps> = () => {
               
           </dashboardStyles.InformationWrapper>
           {orderData && displayOrderDetails ? <>
-<<<<<<< HEAD
             <styles.ButtonBlockWrapper>
               <dashboardStyles.SubmitButton onClick={verifyOrder} ><FontAwesomeIcon icon={ faCheck } />  Verify order redeemed</dashboardStyles.SubmitButton>
             </styles.ButtonBlockWrapper>
-=======
-            <dashboardStyles.ContentBlockWrapper>
-              <dashboardStyles.SubmitButton onClick={verifyOrder} ><FontAwesomeIcon icon={ faCheck } />  Verify order redeemed</dashboardStyles.SubmitButton>
-            </dashboardStyles.ContentBlockWrapper>
->>>>>>> origin/master
           </> : null}
 
           {displayVerfied ? <>
@@ -144,10 +129,7 @@ const VerifyOrder:FunctionComponent<VerifyOrderProps> = () => {
               </> : null}
         </dashboardStyles.ContentBlockWrapper>
       </dashboardStyles.DashboardContainer>
-<<<<<<< HEAD
     </>
-=======
->>>>>>> origin/master
   )
 }
 

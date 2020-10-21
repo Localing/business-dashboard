@@ -8,15 +8,11 @@ interface InformationWrapperProps {
 
 // Component styles
 export const DashboardContainer = styled(Container)`
-<<<<<<< HEAD
   padding: 20px 50px;
 
   @media (max-width: 720px) {
     padding: 20px;
   }
-=======
-  padding: 50px;
->>>>>>> origin/master
 `;
 
 export const SectionTitle = styled.h2`
@@ -27,15 +23,12 @@ export const SectionTitle = styled.h2`
   border-bottom: 2px #aaaaaa solid;
 `;
 
-<<<<<<< HEAD
 export const SectionTitleSmall = styled.span`
   color: #343a40;
   font-size: 1.1rem;
   padding-left: 10px;
 `;
 
-=======
->>>>>>> origin/master
 export const ContentBlockWrapper = styled.div`
   margin: 30px 0;
 `;
@@ -50,7 +43,6 @@ export const Information = styled.p`
 
 export const InformationSubBox = styled.div`
   border: 1px #cccccc solid;
-<<<<<<< HEAD
   background-color: #fff;
   padding: 20px;
   width: 100%;
@@ -58,9 +50,6 @@ export const InformationSubBox = styled.div`
   @media (max-width: 720px) {
     margin-bottom: 20px !important;
   }
-=======
-  padding: 20px;
->>>>>>> origin/master
 `;
 
 export const InformationSubHeading = styled.p`
@@ -72,18 +61,11 @@ export const InformationSubHeading = styled.p`
 
 export const InformationWrapper = styled.div<InformationWrapperProps>`
   display: flex;
-<<<<<<< HEAD
   flex-grow: 1;
   flex-basis: 0;
   
   flex-direction: ${ ({ direction }) => (direction === "row" ? "row" : (direction === "column" ? "column" : "default")) };
   & > div {
-=======
-  flex-direction: ${ ({ direction }) => (direction === "row" ? "row" : (direction === "column" ? "column" : "default")) };
-  & > div {
-    flex-grow: 1;
-    flex-basis: 0;
->>>>>>> origin/master
     margin: ${ ({ direction }) => (direction === "row" ? "0 15px" : (direction === "column" ? "15px 0" : "default")) };
     &:first-child {
       ${ ({ direction }) => (direction === "row" ? "margin-left: 0;" : (direction === "column" ? "margin-top: 0;" : "")) }
@@ -92,7 +74,6 @@ export const InformationWrapper = styled.div<InformationWrapperProps>`
       ${ ({ direction }) => (direction === "row" ? "margin-right: 0;" : (direction === "column" ? "margin-bottom: 0;" : "")) }
     }
   }
-<<<<<<< HEAD
 
   @media (max-width: 720px) {
     display: block;
@@ -100,6 +81,4 @@ export const InformationWrapper = styled.div<InformationWrapperProps>`
       margin: 0;
     }
   }
-=======
->>>>>>> origin/master
 `;
