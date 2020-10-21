@@ -10,8 +10,27 @@ export const Sidebar = styled(Col)`
 
 export const Main = styled(Col)`
   padding: 0;
+  margin-left: calc( 100% * (1 / 6) );
+  width: calc( 100vw * (5/6));
+  
+  min-height: 100vh;
+
+  @media (max-width: 1200px) {
+    width: 75vw;
+    margin-left: 25vw;
+  }
+
+  @media (max-width: 720px) {
+    margin-left: 0;
+    width: 100vw;
+  }
 `;
 
 export const ContentContainer = styled.div`
 
+`;
+
+export const WholePageWrapper = styled.div`
+  width: 100vw;
+  height: 100vh;
 `;

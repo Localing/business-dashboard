@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import Alert from "react-bootstrap/Alert";
 import Spinner from "react-bootstrap/Spinner";
 import Form from "react-bootstrap/Form";
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { Auth } from "aws-amplify";
+import PageTitle from 'react-helmet';
 
 import * as styles from './styles/LoginStyles';
 
@@ -68,6 +67,7 @@ const ResetPassword = () => {
     }
     return (
             <>
+            <PageTitle title="Reset Password" />
             <styles.BackgroundImage></styles.BackgroundImage>
             <styles.LoginBoxWrapper><styles.LoginBox>
                 {codeSent ?

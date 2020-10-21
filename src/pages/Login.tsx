@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Redirect, RouteComponentProps, Link } from 'react-router-dom';
-import { useUserData } from '../UserContext';
+import { Redirect, RouteComponentProps } from 'react-router-dom';
+import { useUserData } from '../contexts/UserContext';
 import Alert from 'react-bootstrap/Alert';
 import Spinner from 'react-bootstrap/Spinner';
-import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import LocalingLogo from './../assets/localingLogo.png';
+import PageTitle from './../components/PageTitle';
 
 import * as styles from './styles/LoginStyles';
 
@@ -17,11 +17,6 @@ const Login = (props: RouteComponentProps) => {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-
-    const clearLoginFields = () => {
-        setUsername("");
-        setPassword("");
-    }
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         event.preventDefault();
@@ -42,18 +37,19 @@ const Login = (props: RouteComponentProps) => {
     const handleLogin = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         userData.login(username, password);
-        clearLoginFields();
     }
 
     return (
-        userData.authenticated ?
+      <>
+        <PageTitle title="Login" />
+        {userData.authenticated ?
             <Redirect to={from} />
             :
             <>
                 <styles.BackgroundImage></styles.BackgroundImage>
                 <styles.LoginBoxWrapper>
                     <styles.LoginBox>
-                        <styles.Logo src={LocalingLogo} />
+                        <styles.Logo alt={"Localing logo"} src={LocalingLogo} />
                         <Form onSubmit={handleLogin}>
                             <styles.LoginTextWrapper>
                                 <styles.LoginTitle>Localing for Business</styles.LoginTitle>
@@ -96,7 +92,8 @@ const Login = (props: RouteComponentProps) => {
                         </Form>
                     </styles.LoginBox>
                 </styles.LoginBoxWrapper>
-            </>
+            </>}
+          </>
     )
 }
 

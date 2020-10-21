@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Redirect } from 'react-router-dom';
-import { useUserData } from '../UserContext';
+import { useUserData } from '../contexts/UserContext';
 
 function Home() {
     const userData = useUserData();
