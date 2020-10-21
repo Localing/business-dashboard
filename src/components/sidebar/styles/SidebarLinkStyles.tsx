@@ -1,9 +1,13 @@
+<<<<<<< HEAD
 import React from 'react';
+=======
+>>>>>>> origin/master
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface NavigationLinkProps {
+<<<<<<< HEAD
   linkActive: boolean
 }
 
@@ -43,10 +47,24 @@ export const NavigationLink = styled(({linkActive, ...rest}) => <Link {...rest} 
       `)}
     }
   }
+=======
+  active: boolean
+}
+
+// Component styles
+export const NavigationLink = styled(Link)<NavigationLinkProps>`
+  color: ${ ({active}) => (active ? "#466ed4" : "#666666")};
+`;
+
+export const NavigationIcon = styled(FontAwesomeIcon)`
+  display: inline-block;
+  margin-right: 10px;
+>>>>>>> origin/master
 `;
 
 export const NavigationText = styled.p`
   display: inline-block;
+<<<<<<< HEAD
   margin: 0;
   font-weight: 600;
   font-size: 1rem;
@@ -55,5 +73,7 @@ export const NavigationText = styled.p`
   @media (max-width: 720px) {
     font-size: 1.2rem;
   }
+=======
+>>>>>>> origin/master
 `;
 

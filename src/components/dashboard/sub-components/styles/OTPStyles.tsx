@@ -7,7 +7,11 @@ export const SingleOTPInputBox = styled.input`
   padding: 10px 20px;
   width: 1ch;
   border-radius: 5px;
+<<<<<<< HEAD
   border: 1px #aaaaaa solid;
+=======
+  border: 2px #aaaaaa solid;
+>>>>>>> origin/master
   font-size 2em;
   font-weight: bold;
   &:first-child {
@@ -19,7 +23,11 @@ export const SingleOTPInputBox = styled.input`
 `;
 
 export const GroupWrapper = styled.div`
+<<<<<<< HEAD
   padding: 20px 0px;
+=======
+  padding: 20px;
+>>>>>>> origin/master
   display: flex;
   align-items: center;
   &:first-child {
@@ -28,6 +36,7 @@ export const GroupWrapper = styled.div`
   &:last-child {
     padding-right: 0;
   }
+<<<<<<< HEAD
 
   @media (max-width: 900px) {
     width: 100%;
@@ -35,6 +44,8 @@ export const GroupWrapper = styled.div`
     padding: 0px;
     flex-flow: wrap;
   }
+=======
+>>>>>>> origin/master
 `;
 
 export const Separator = styled.p`
@@ -44,6 +55,7 @@ export const Separator = styled.p`
   color: #aaaaaa;
 `;
 
+<<<<<<< HEAD
 export const GroupSeparator = styled.p`
   display: inline-block;
   line-height: 2em;
@@ -76,4 +88,8 @@ export const SectionWrapper = styled.div`
     display: flex;
     align-items: center;
   }
+=======
+export const OTPWrapper = styled.div`
+  display: flex;
+>>>>>>> origin/master
 `;

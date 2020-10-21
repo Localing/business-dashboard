@@ -1,8 +1,12 @@
+<<<<<<< HEAD
 import React from 'react';
+=======
+>>>>>>> origin/master
 import styled from 'styled-components';
 import Col from 'react-bootstrap/Col';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+<<<<<<< HEAD
 interface SidebarProps {
   sidebarShow: boolean
 }
@@ -37,23 +41,35 @@ export const SidebarToggleMobile = styled.span`
   @media (max-width: 720px) {
     display: inline-block;
   }
+=======
+// Component styles
+export const Sidebar = styled(Col)`
+  background-color: #f8f9fa;
+  height: 100vh;
+  border-right: 2px #dddddd solid;
+>>>>>>> origin/master
 `;
 
 export const BusinessName = styled.p`
   font-weight: bold;
   font-size: 1.4rem;
   margin: 0;
+<<<<<<< HEAD
   padding: 40px 20px 20px 20px;
   color: #fff;
 
   @media (max-width: 720px) {
     padding-top: 40px;
   }
+=======
+  padding: 20px 20px;
+>>>>>>> origin/master
 `;
 
 export const NavigationSection = styled.div`
   display: flex;
   flex-direction: column;
+<<<<<<< HEAD
   padding: 10px 0;
   width: 100%;
 `;
@@ -104,5 +120,8 @@ export const MobileLogout = styled.div`
   align-items: center;
   height: 10vh;
   width: 100%;
+=======
+  padding: 10px 20px;
+>>>>>>> origin/master
 `;
 

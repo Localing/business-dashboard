@@ -173,11 +173,16 @@ const OTPInput:FunctionComponent<OTPProps> = (props) => {
           />
         )
       }
+<<<<<<< HEAD
       let groupSeparator = (i !== props.numGroups - 1) ? <styles.GroupSeparator>
         <FontAwesomeIcon icon={faMinus} />
       </styles.GroupSeparator> : null;
 
       inputs.push(<styles.SectionWrapper key={i}><styles.GroupWrapper>{subInputGroup}</styles.GroupWrapper>{groupSeparator}</styles.SectionWrapper>);
+=======
+
+      inputs.push(<styles.GroupWrapper key={i}>{subInputGroup}</styles.GroupWrapper>);
+>>>>>>> origin/master
       
     }
     return inputs;
