@@ -10408,10 +10408,10 @@ react-dom@^16.14.0:
     prop-types "^15.6.2"
     scheduler "^0.19.1"
 
-react-easy-crop@^3.2.1:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/react-easy-crop/-/react-easy-crop-3.2.1.tgz#b72f553a04815fa1bcfdd1ccf1be68dfd6699d5f"
-  integrity sha512-5igouY5tKFckQHdKl5fDq2uT3dq6cEC/V+a2OvgVs6Hh9LxeE7vQvrAoOHsHzH7CnlSnen+KW3Mb4HkQs9qr2A==
+react-easy-crop@^3.2.2:
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/react-easy-crop/-/react-easy-crop-3.2.2.tgz#6e9efc1933351ad9caa563030a59b6eed13d1e64"
+  integrity sha512-clDimDXVvxOAhM/jKx5RO6zrk+ODqXj1FI50Fznm/qYlsZlbhS8z1R4yk9yynTYOpt8524inTczywhGVaCGlRA==
   dependencies:
     tslib "2.0.1"
 
