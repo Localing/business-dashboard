@@ -2,6 +2,8 @@
 
 A React dashboard that allows businesses on Localing to manage their orders.
 
+![Demo of the Business Dashboard](https://user-images.githubusercontent.com/1212163/147486188-3fc0e44a-b3f1-4c48-b588-bad0adc0fa92.gif)
+
 ## Available Scripts
 
 In the project directory, you can run:
